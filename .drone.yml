@@ -1,0 +1,36 @@
+
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: blog-build
+    image: node:16.14.0-slim
+    commands:
+      - yarn config set registry https://registry.npmmirror.com
+      - yarn
+      - yarn run build
+    when:
+      branch:
+      - main
+      event:
+      - push
+
+  - name: blog-image
+    image: docker
+    volumes:
+    - name: dockersock
+      path: /var/run/docker.sock
+    commands:
+    - docker build -t blog:dev .
+    - docker rm -f blog
+    - docker run -d -p 8080:80 --name blog --restart=always blog:dev
+    when:
+      branch:
+      - main
+      event:
+      - push
+
+
+    
+  
