@@ -4,17 +4,17 @@ type: docker
 name: default
 
 steps:
-  - name: blog-build
-    image: node:16.14.0-slim
-    commands:
-      - yarn config set registry https://registry.npmmirror.com
-      - yarn
-      - yarn run build
-    when:
-      branch:
-      - master
-      event:
-      - push
+  # - name: blog-build
+  #   image: node:16.14.0-slim
+  #   commands:
+  #     - yarn config set registry https://registry.npmmirror.com
+  #     - yarn
+  #     - yarn run build
+  #   when:
+  #     branch:
+  #     - master
+  #     event:
+  #     - push
 
   - name: blog-image
     image: docker
