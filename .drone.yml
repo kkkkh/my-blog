@@ -24,7 +24,7 @@ steps:
     commands:
     - docker build -t blog:dev .
     - docker rm -f blog
-    - docker run -d -p 80:80 --name blog --restart=always blog:dev
+    - docker run -d -p 8000:80 --name blog --restart=always blog:dev
     when:
       branch:
       - main
