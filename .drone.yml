@@ -12,7 +12,7 @@ steps:
       - yarn run build
     when:
       branch:
-      - main
+      - master
       event:
       - push
 
@@ -27,10 +27,10 @@ steps:
     - docker run -d -p 8000:80 --name blog --restart=always blog:dev
     when:
       branch:
-      - main
+      - master
       event:
       - push
-      
+
 volumes:
 - name: dockersock
   host:
