@@ -5,7 +5,7 @@ nav:
   about: ABOUT
   collect: COLLECT
   search: SEARCH
-  categories: CATEGORY
+  # categories: CATEGORY
 #
 #post:
 #  postTime: 发布于
@@ -15,6 +15,7 @@ post:
   postTime: Post
   tags: Tags
   visit: Visit
+  # categories: Categories
   donate: donate
 
 search:

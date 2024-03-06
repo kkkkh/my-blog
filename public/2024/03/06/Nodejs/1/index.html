@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="kkkkh&#39;s blog">
+    <meta property="og:type" content="website">
+    <meta name="description" content="kkkkh&#39;s blog">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        《深入浅出Node.js》-1简介 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Record and convert </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>kkkkh</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/categories">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>nav.categories</span>
+                </a>
+            </li> -->
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E8%AF%9E%E7%94%9F"><span class="toc-text">1、诞生</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E7%94%B1%E6%9D%A5%E5%8F%8A%E5%8F%91%E5%B1%95"><span class="toc-text">2、由来及发展</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81node-%E8%AF%9E%E7%94%9F%E6%84%8F%E4%B9%89"><span class="toc-text">3、node 诞生意义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81Node%E7%89%B9%E7%82%B9"><span class="toc-text">4、Node特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">5、应用场景</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> Record and convert </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        《深入浅出Node.js》-1简介
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2024-03-06 15:13:22</span></span>
+        <!-- 
+        </span> -->
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#server" title="server">server</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Nodejs" title="Nodejs">Nodejs</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h4 id="1、诞生"><a href="#1、诞生" class="headerlink" title="1、诞生"></a>1、诞生</h4><ul>
+<li>2009年3月，Ryan Dahl在其博客上宣布准备基于V8创建一个轻量级的Web服务器并提供一套库。</li>
+<li>2009年5月，Ryan Dahl在GitHub上发布了最初的版本。</li>
+</ul>
+<h4 id="2、由来及发展"><a href="#2、由来及发展" class="headerlink" title="2、由来及发展"></a>2、由来及发展</h4><ul>
+<li>为基于事件驱动、非阻塞I&#x2F;O的Web服务器</li>
+<li>node而生</li>
+<li>但是项目的发展超过了他最初单纯开发一个Web服务器的想法</li>
+<li>变成了构建网络应用的一个基础框架</li>
+<li>包含：服务器、客户端、命令行工具</li>
+<li>最终：<ul>
+<li>为一个强制不共享任何资源的单线程、单进程系统，</li>
+<li>包含十分适宜网络的库，</li>
+<li>为构建大型分布式应用程序提供基础设施</li>
+</ul>
+</li>
+</ul>
+<h4 id="3、node-诞生意义"><a href="#3、node-诞生意义" class="headerlink" title="3、node 诞生意义"></a>3、node 诞生意义</h4><ul>
+<li>浏览器中局限<ul>
+<li>h5和js的能力</li>
+<li>来于webkit 和 v8</li>
+<li>取决于浏览器中间层提供的支持有多少</li>
+<li>长久以来却限制在浏览器的沙箱中运行</li>
+</ul>
+</li>
+<li>Nodejs 与 浏览器 对比<ul>
+<li>都是基于事件驱动的异步架构</li>
+<li>浏览器<ul>
+<li>通过事件驱动来服务界面上的交互，</li>
+</ul>
+</li>
+<li>Node<ul>
+<li>通过事件驱动来服务I&#x2F;O</li>
+<li>并且功能得到拓展：随心所欲地访问本地文件，可以搭建WebSocket服务器端，可以连接数据库</li>
+</ul>
+</li>
+<li>Node不处理UI，但用与浏览器相同的机制和原理运行</li>
+<li>也有对两者同时运用的尝试<ul>
+<li>出现node-webkit这样的项目（2012年）<ul>
+<li>Node中的事件循环和WebKit的事件循环融合在一起，</li>
+<li>既可以通过它享受HTML、CSS带来的UI构建，</li>
+<li>也能通过它访问本地资源，将两者的优势整合到一起</li>
+</ul>
+</li>
+<li>github未找到项目（2024年），可能已经过时</li>
+<li>像后来的nuxt是对此一种延续（我的理解）<br><img src="https://res.weread.qq.com/wrepub/epub_26211935_3" alt="img"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4、Node特点"><a href="#4、Node特点" class="headerlink" title="4、Node特点"></a>4、Node特点</h4><ul>
+<li>特点1：异步I&#x2F;O<ul>
+<li>以读取文件为例，我们可以看到它与前端Ajax调用的方式是极其类似的<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;/path&#x27;</span>, <span class="keyword">function</span> (<span class="params">err, file</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(’读取文件完成’)</span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(’发起读取文件’);</span><br></pre></td></tr></table></figure></li>
+<li>在Node中，绝大多数的操作都以异步的方式进行调用。</li>
+<li>Ryan Dahl排除万难，在底层构建了很多异步I&#x2F;O的API：例如文件读取、网络请求等</li>
+<li>从语言层面很自然地进行并行I&#x2F;O操作</li>
+</ul>
+</li>
+<li>特点2：事件<ul>
+<li>将前端浏览器中应用广泛且成熟的事件引入后端，配合异步I&#x2F;O，将事件点暴露给业务逻辑。</li>
+<li>为其绑定了request事件，对于请求对象，我们为其绑定了data事件和end事件<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"><span class="comment">// 侦听服务器的request事件</span></span><br><span class="line">http.<span class="title function_">createServer</span>(<span class="keyword">function</span> (<span class="params">req, res</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> postData = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  req.<span class="title function_">setEncoding</span>(<span class="string">&#x27;utf8&#x27;</span>);</span><br><span class="line">  <span class="comment">// 侦听请求的data事件</span></span><br><span class="line">  req.<span class="title function_">on</span>(<span class="string">&#x27;data&#x27;</span>, <span class="keyword">function</span> (<span class="params">chunk</span>) &#123;</span><br><span class="line">    postData += chunk;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// 侦听请求的end事件</span></span><br><span class="line">  req.<span class="title function_">on</span>(<span class="string">&#x27;end&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    res.<span class="title function_">end</span>(postData);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;).<span class="title function_">listen</span>(<span class="number">8080</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(’服务器启动完成’);</span><br></pre></td></tr></table></figure></li>
+<li>事件编程特点：轻量级、松耦合、只关注事务点等优势</li>
+<li>问题：事件与事件之间各自独立，如何协作是一个问题。</li>
+</ul>
+</li>
+<li>特点3：回调函数<ul>
+<li>回调函数无处不在</li>
+<li>回调函数也是最好的接受异步调用返回数据的方式。</li>
+</ul>
+</li>
+<li>特点4：单线程<ul>
+<li>Node保持了JavaScript在浏览器中单线程的特点</li>
+<li>优点：<ul>
+<li>避免了多线程问题</li>
+<li>多线程编程那样处处在意状态的同步问题</li>
+<li>这里没有死锁的存在，</li>
+<li>也没有线程上下文交换所带来的性能上的开销</li>
+</ul>
+</li>
+<li>不足：<ul>
+<li>无法利用多核CPU</li>
+<li>错误会引起整个应用退出，应用的健壮性值得考验</li>
+<li>大量计算占用CPU导致无法继续调用异步I&#x2F;O</li>
+</ul>
+</li>
+<li>解决不足：<ul>
+<li>Node采用了与Web Workers相同的思路</li>
+<li>来解决单线程中大计算量的问题：child_process<ul>
+<li>从容地应对单线程在健壮性和无法利用多核CPU方面的问题。</li>
+<li>将计算分发到各个子进程，</li>
+<li>可以将大量计算分解掉，</li>
+<li>然后再通过进程之间的事件消息来传递结果，</li>
+<li>这可以很好地保持应用模型的简单和低依赖</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>特点5：跨平台<ul>
+<li>Node基于libuv实现跨平台的架构示意图</li>
+<li>兼容Windows和*nix平台主要得益于Node在架构层面的改动</li>
+<li>它在操作系统与Node上层模块系统之间构建了一层平台层架构，即libuv。</li>
+<li>目前，libuv已经成为许多系统实现跨平台的基础组件</li>
+<li>Node的第三方C++模块也可以借助libuv实现跨平台。</li>
+</ul>
+</li>
+</ul>
+<h4 id="5、应用场景"><a href="#5、应用场景" class="headerlink" title="5、应用场景"></a>5、应用场景</h4><ul>
+<li>1、I&#x2F;O密集型<ul>
+<li>Node面向网络且擅长并行I&#x2F;O，能够有效地组织起更多的硬件资源</li>
+<li>主要在于Node利用事件循环的处理能力</li>
+</ul>
+</li>
+<li>2、CPU密集型业务<ul>
+<li>收否胜任？</li>
+<li>V8的执行效率非常高，和其他语言相比速度也非常快</li>
+<li>主要挑战是：js单线程，如果长时间运行计算，使得后续I&#x2F;O无法发起</li>
+<li>解决方法：<ul>
+<li>调整、分解大型运算任务为多个小任务，</li>
+<li>运算适时释放，</li>
+<li>不阻塞I&#x2F;O调用发起</li>
+<li>对于一个纯计算的场景，或许根本没有I&#x2F;O，改用多线程</li>
+<li>Node没有多线程，如何解决？<ul>
+<li>Node可以通过编写C&#x2F;C++扩展的方式更高效地利用CPU</li>
+<li>子进程处理</li>
+</ul>
+</li>
+<li>CPU密集不可怕，如何合理调度是诀窍</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3、遗留系统处理<ul>
+<li>对待原来的旧系统，譬如java&#x2F;jsp</li>
+<li>旧有的系统具有非常稳定的数据输出，持续为传统网站服务，</li>
+<li>同时为移动版提供数据源，Node将该数据源当做数据接口，发挥异步并行的优势</li>
+<li>旧系统只做接口和中间件</li>
+</ul>
+</li>
+<li>4、分布式应用<ul>
+<li>并行地去多台数据库中获取数据并合并</li>
+<li>NodeFox能实现对多台MySQL数据库的查询，如同查询一台MySQL一样，</li>
+<li>而ITier更强大，查询多个数据库（不同的数据库）如同查询单个数据库一样</li>
+<li>Node高效利用并行I&#x2F;O的过程，也是高效使用数据库的过程、</li>
+</ul>
+</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/kkkkh">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <!-- <span>/</span> -->
+        
+        
+        <span><a target="_blank" rel="noopener" href="https://gen.zhtk.top">gen</a></span>
+        
+        
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://med.zhtk.top">med</a></span>
+        
+        
+        <span>/</span>
+        
+        <span><a href="">京ICP备2021005439号</a></span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        <!-- Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p> -->
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://giscus.app/client.js"
+  data-repo="kkkkh/my-blog"
+  data-repo-id="R_kgDOLb1f6w"
+  data-category="Announcements"
+  data-category-id="DIC_kwDOLb1f684CduwR"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="light"
+  data-lang="zh-CN"
+  crossorigin="anonymous"
+  async>
+</script>
+
+
+
+
+</html>

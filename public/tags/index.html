@@ -12,7 +12,7 @@
 
     <title>
         
-        tags - undefined
+        Tags - undefined
         
     </title>
 
@@ -81,12 +81,12 @@
                     <span>标签</span>
                 </a>
             </li>
-            <li >
+            <!-- <li >
                 <a href="/categories">
                     <i class="iconfont icon-shoucang1"></i>
-                    <span>分类</span>
+                    <span>nav.categories</span>
                 </a>
-            </li>
+            </li> -->
             <li >
                 <a href="/archives">
                     <i class="iconfont icon-guidang2"></i>
@@ -141,14 +141,60 @@
     <div class="index-middle">
         <!-- Main Content -->
         
-<div class="post-content no-indent">
+
+<div id='tag_cloud' class="tags">
     
+    <a href="#Nodejs" class="tag-triangle" title="Nodejs"><i class="tag-i">Nodejs</i></a>
     
-    <div id="comment-container"></div>
-    <div id="disqus_thread"></div>
-    <div class="giscus"></div>
-    <div id="lv-container"></div>
+    <a href="#server" class="tag-triangle" title="server"><i class="tag-i">server</i></a>
+    
 </div>
+
+<!-- 标签列表 -->
+
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="Nodejs">
+                    <span class="tag-text">Nodejs</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2024/03/06/Nodejs/1/">
+            <h2 class="post-title">
+                《深入浅出Node.js》-1简介
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+</div>
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="server">
+                    <span class="tag-text">server</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2024/03/06/Nodejs/1/">
+            <h2 class="post-title">
+                《深入浅出Node.js》-1简介
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+</div>
+
 
     </div>
 </div>
@@ -223,23 +269,6 @@
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-
-
-    <script src="https://giscus.app/client.js"
-  data-repo="kkkkh/my-blog"
-  data-repo-id="R_kgDOLb1f6w"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOLb1f684CduwR"
-  data-mapping="pathname"
-  data-strict="0"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="bottom"
-  data-theme="light"
-  data-lang="zh-CN"
-  crossorigin="anonymous"
-  async>
-</script>
 
 
 

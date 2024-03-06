@@ -22,12 +22,12 @@
                     <span><%= __('nav.tags') %></span>
                 </a>
             </li>
-            <li <% if(is_current('categories')){ %> <%- "class=active" %> <% } %>>
+            <!-- <li <% if(is_current('categories')){ %> <%- "class=active" %> <% } %>>
                 <a href="<%= url_for(config.category_dir) %>">
                     <i class="iconfont icon-shoucang1"></i>
                     <span><%= __('nav.categories') %></span>
                 </a>
-            </li>
+            </li> -->
             <li <% if(is_current('archive')){ %> <%- "class=active" %> <% } %>>
                 <a href="<%= url_for(config.archive_dir) %>">
                     <i class="iconfont icon-guidang2"></i>

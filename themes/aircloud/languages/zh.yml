@@ -5,11 +5,12 @@ nav:
   about: 关于
   collect: 收藏
   search: 搜索
-  categories: 分类
+  # categories: 分类
 
 post:
   postTime: 发布于
   tags: 标签
+  # categories: 分类
   visit: 访问
   donate: 赞赏
 
