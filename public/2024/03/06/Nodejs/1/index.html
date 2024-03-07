@@ -117,7 +117,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E8%AF%9E%E7%94%9F"><span class="toc-text">1、诞生</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E7%94%B1%E6%9D%A5%E5%8F%8A%E5%8F%91%E5%B1%95"><span class="toc-text">2、由来及发展</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81node-%E8%AF%9E%E7%94%9F%E6%84%8F%E4%B9%89"><span class="toc-text">3、node 诞生意义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81Node%E7%89%B9%E7%82%B9"><span class="toc-text">4、Node特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">5、应用场景</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E8%AF%9E%E7%94%9F"><span class="toc-text">1、诞生</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E7%94%B1%E6%9D%A5%E5%8F%8A%E5%8F%91%E5%B1%95"><span class="toc-text">2、由来及发展</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81node-%E6%84%8F%E4%B9%89"><span class="toc-text">3、node 意义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81Node%E7%89%B9%E7%82%B9"><span class="toc-text">4、Node特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">5、应用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
 </div>
     
 </div>
@@ -173,23 +173,46 @@
     </div>
     <div class="post-content no-indent">
         <h4 id="1、诞生"><a href="#1、诞生" class="headerlink" title="1、诞生"></a>1、诞生</h4><ul>
-<li>2009年3月，Ryan Dahl在其博客上宣布准备基于V8创建一个轻量级的Web服务器并提供一套库。</li>
-<li>2009年5月，Ryan Dahl在GitHub上发布了最初的版本。</li>
+<li>2009年，Ryan Dahl 发布</li>
 </ul>
-<h4 id="2、由来及发展"><a href="#2、由来及发展" class="headerlink" title="2、由来及发展"></a>2、由来及发展</h4><ul>
-<li>为基于事件驱动、非阻塞I&#x2F;O的Web服务器</li>
-<li>node而生</li>
-<li>但是项目的发展超过了他最初单纯开发一个Web服务器的想法</li>
+<h4 id="2、由来及发展"><a href="#2、由来及发展" class="headerlink" title="2、由来及发展"></a>2、由来及发展</h4><blockquote>
+<p>这一章主要讲了<br>node使用js作为实现语言的由来：js符合作者预期<br>和node名字的由来：网络功能节点</p>
+</blockquote>
+<ul>
+<li>1、作者的初衷就是<ul>
+<li>设计一款基于事件驱动、非阻塞I&#x2F;O的Web服务器，达到高性能</li>
+<li>评估了C、Lua、Haskell、Ruby，都不理想</li>
+<li>js评估<ul>
+<li>js 后端历史包袱为零 采用非阻塞I&#x2F;O</li>
+<li>浏览器广泛的事件驱动</li>
+<li>v8高性能引擎</li>
+</ul>
+</li>
+<li>node而生，js成为其实现语言</li>
+</ul>
+</li>
+<li>2、为什么叫node<ul>
+<li>最后发展超过了他最初单纯开发一个Web服务器的想法</li>
 <li>变成了构建网络应用的一个基础框架</li>
 <li>包含：服务器、客户端、命令行工具</li>
 <li>最终：<ul>
 <li>为一个强制不共享任何资源的单线程、单进程系统，</li>
 <li>包含十分适宜网络的库，</li>
 <li>为构建大型分布式应用程序提供基础设施</li>
+<li>成为一个构建快速、可伸缩的网络应用平台</li>
+</ul>
+</li>
+<li>通过通信协议来组织许多Node，</li>
+<li>非常容易通过扩展来达成构建大型网络应用的目的</li>
+<li>每一个Node进程都构成这个网络应用中的一个节点</li>
+<li>因此叫node就符合了这个款产品的定位</li>
 </ul>
 </li>
 </ul>
-<h4 id="3、node-诞生意义"><a href="#3、node-诞生意义" class="headerlink" title="3、node 诞生意义"></a>3、node 诞生意义</h4><ul>
+<h4 id="3、node-意义"><a href="#3、node-意义" class="headerlink" title="3、node 意义"></a>3、node 意义</h4><blockquote>
+<p>这一章讲了node诞生产生意义<br>主要是js以后可以再服务器端大展拳脚<br>js在浏览器端和服务器端做了对比</p>
+</blockquote>
+<ul>
 <li>浏览器中局限<ul>
 <li>h5和js的能力</li>
 <li>来于webkit 和 v8</li>
@@ -200,7 +223,7 @@
 <li>Nodejs 与 浏览器 对比<ul>
 <li>都是基于事件驱动的异步架构</li>
 <li>浏览器<ul>
-<li>通过事件驱动来服务界面上的交互，</li>
+<li>通过事件驱动来服务界面上的交互</li>
 </ul>
 </li>
 <li>Node<ul>
@@ -223,7 +246,10 @@
 </ul>
 </li>
 </ul>
-<h4 id="4、Node特点"><a href="#4、Node特点" class="headerlink" title="4、Node特点"></a>4、Node特点</h4><ul>
+<h4 id="4、Node特点"><a href="#4、Node特点" class="headerlink" title="4、Node特点"></a>4、Node特点</h4><blockquote>
+<p>本章讲了Node的特点<br>异步I&#x2F;O：读取文件等、事件机制驱动：模拟浏览器、回调函数<br>单线程：优点以及不足，child_process解决不足<br>扩平台：libuv解决</p>
+</blockquote>
+<ul>
 <li>特点1：异步I&#x2F;O<ul>
 <li>以读取文件为例，我们可以看到它与前端Ajax调用的方式是极其类似的<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;/path&#x27;</span>, <span class="keyword">function</span> (<span class="params">err, file</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(’读取文件完成’)</span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(’发起读取文件’);</span><br></pre></td></tr></table></figure></li>
 <li>在Node中，绝大多数的操作都以异步的方式进行调用。</li>
@@ -281,7 +307,10 @@
 </ul>
 </li>
 </ul>
-<h4 id="5、应用场景"><a href="#5、应用场景" class="headerlink" title="5、应用场景"></a>5、应用场景</h4><ul>
+<h4 id="5、应用场景"><a href="#5、应用场景" class="headerlink" title="5、应用场景"></a>5、应用场景</h4><blockquote>
+<p>本章主要讲了Node的使用场景，包括<br>I&#x2F;O密集型<br>如胜任CPU密集型业务：c++扩展、子进程<br>遗留系统：使用老接口<br>分布式数据库查询</p>
+</blockquote>
+<ul>
 <li>1、I&#x2F;O密集型<ul>
 <li>Node面向网络且擅长并行I&#x2F;O，能够有效地组织起更多的硬件资源</li>
 <li>主要在于Node利用事件循环的处理能力</li>
@@ -317,9 +346,13 @@
 <li>并行地去多台数据库中获取数据并合并</li>
 <li>NodeFox能实现对多台MySQL数据库的查询，如同查询一台MySQL一样，</li>
 <li>而ITier更强大，查询多个数据库（不同的数据库）如同查询单个数据库一样</li>
-<li>Node高效利用并行I&#x2F;O的过程，也是高效使用数据库的过程、</li>
+<li>Node高效利用并行I&#x2F;O的过程，也是高效使用数据库的过程</li>
 </ul>
 </li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>第一篇讲的是一些概念，但是非常重要，例如异步、事件（事件驱动）、回调、非阻塞、I&#x2F;O、libuv等</li>
+<li>之前java同事问我，node到底是个啥？我其实都没有答好，在他们看来是服务器应该像阿帕奇之类的，怎么还用js做开发呢，现在理解node其实是一个综合体，既包括服务器，也包括运行时的环境，使用v8</li>
 </ul>
 
         
