@@ -271,7 +271,14 @@
 </blockquote>
 <ul>
 <li>1、c&#x2F;c++扩展模块的优势，比js更有性能的优势（位运算）</li>
-<li>2、原生模块编译：在不同的平台(linux\windows)，用不同的编译软件(g++&#x2F;gcc、vc++)，生成不同的文件(.so、.dll)，但都是.node</li>
+<li>2、原生模块编译：<ul>
+<li>在不同的平台(linux\windows)，</li>
+<li>也是用了node-gyp</li>
+<li>底层的编译工具链，用不同的编译软件(g++&#x2F;gcc、vc++)，</li>
+<li>生成不同的文件(.so、.dll)，</li>
+<li>但都是.node</li>
+</ul>
+</li>
 <li>3、c&#x2F;c++扩展模块的<ul>
 <li>编写：.js、.&#x2F;hello&#x2F;hello.cc(与内建模块有区别，没有node_module_list链表)</li>
 <li>编译：GYP编译（跨平台）、node-gyp configure、node-gyp build、.&#x2F;build&#x2F;Release&#x2F;hello.node</li>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="kkkkh&#39;s blog">
+    <meta property="og:type" content="website">
+    <meta name="description" content="kkkkh&#39;s blog">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        《深入浅出Node.js》-5内存控制 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Record and convert </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>kkkkh</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/categories">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>nav.categories</span>
+                </a>
+            </li> -->
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81V8%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%E4%B8%8E%E5%86%85%E5%AD%98%E9%99%90%E5%88%B6"><span class="toc-text">1、V8的垃圾回收机制与内存限制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E9%AB%98%E6%80%A7%E8%83%BD%E4%BD%BF%E7%94%A8%E5%86%85%E5%AD%98"><span class="toc-text">2、高性能使用内存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%86%85%E5%AD%98%E6%8C%87%E6%A0%87"><span class="toc-text">3、内存指标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="toc-text">4、内存泄漏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%8E%92%E6%9F%A5"><span class="toc-text">5、内存泄漏排查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81%E5%A4%A7%E5%86%85%E5%AD%98%E5%BA%94%E7%94%A8"><span class="toc-text">6、大内存应用</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> Record and convert </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        《深入浅出Node.js》-5内存控制
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2024-03-10 16:13:22</span></span>
+        <!-- 
+        </span> -->
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#server" title="server">server</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Nodejs" title="Nodejs">Nodejs</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h4 id="1、V8的垃圾回收机制与内存限制"><a href="#1、V8的垃圾回收机制与内存限制" class="headerlink" title="1、V8的垃圾回收机制与内存限制"></a>1、V8的垃圾回收机制与内存限制</h4><blockquote>
+<p>v8内存限制大小，为什么限制、垃圾回收机制、以及如何查看垃圾回收日志</p>
+</blockquote>
+<ul>
+<li>1、Node与v8<ul>
+<li>Lars Bak 开发高性能的虚拟机工作背景</li>
+<li>无与伦比的经历让V8一出世就超越了当时所有的JavaScript虚拟机。</li>
+</ul>
+</li>
+<li>2、v8的内存限制<ul>
+<li>64位系统下约为1.4GB，32位系统下约为0.7 GB</li>
+<li>V8为何限制了内存的用量？</li>
+<li>内存使用量的查看方式<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">node</span><br><span class="line">&gt; process.memoryUsage();</span><br><span class="line">&#123; rss: 14958592,</span><br><span class="line">heapTotal: 7195904,// v8申请到堆内存</span><br><span class="line">heapUsed: 2821496 &#125;// 当前使用量</span><br></pre></td></tr></table></figure></li>
+<li>表层原因：为V8最初为浏览器而设计，不太可能遇到用大量内存的场景。</li>
+<li>深层原因：<ul>
+<li>是V8的垃圾回收机制的限制。</li>
+<li>内存越大垃圾回收时间越多</li>
+<li>V8做一次小的垃圾回收需要50毫秒以上， </li>
+<li>做一次非增量式的垃圾回收甚至要1秒以上</li>
+<li>在当时的考虑下直接限制堆内存是一个好的选择。</li>
+<li>使用更多内存<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node --max-old-space-size=<span class="number">1700</span> test.<span class="property">js</span> <span class="comment">// 单位为MB（老生代）</span></span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line">node --max-<span class="keyword">new</span>-space-size=<span class="number">1024</span> test.<span class="property">js</span> <span class="comment">// 单位为KB（新生代）</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>我曾在自己的项目中遇到过，服务器内存过小，导致vite启动打包失败</li>
+</ul>
+</li>
+<li>3、V8的垃圾回收机制<ul>
+<li>v8内存分代<ul>
+<li>新生代<ul>
+<li>存活时间较短的对象</li>
+<li>两个reserved_semispace_size_所构成</li>
+</ul>
+</li>
+<li>老生代<ul>
+<li>较长、常驻</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>v8的垃圾回收算法<ul>
+<li>Scavenge算法（新生代、时间少）<ul>
+<li>采用 Cheney算法</li>
+<li>内存一分为二， 每一部分空间称为semispace，</li>
+<li>只有一个处于使用中（From空间）， 另一个处于闲置状态（To空间） </li>
+<li>垃圾回收时， 会检查From中的存活对象，并且被被复制到To中，非存活对象占用的空间将会被释放。 </li>
+<li>完成复制后， From空间和To空间的角色发生对换。（翻转）</li>
+<li>当一个对象经过多次复制依然存活时，生命周期较长，随后会被移动到老生代中（晋升）</li>
+<li>晋升两个条件：对象是否经历过Scavenge回收， 一个是To空间的内存占用比超过限制（超过25%）</li>
+</ul>
+</li>
+<li>Mark-Sweep &amp; Mark-Compact<ul>
+<li>Mark-Sweep 标记清除<ul>
+<li>标记活着对象和清除没有被标记的对象</li>
+<li>问题：内存碎片、不连续状态、不好分配大对象</li>
+</ul>
+</li>
+<li>Mark-Compact 标记整理<ul>
+<li>解决sweep问题</li>
+<li>对象在标记为死亡后，</li>
+<li>在整理的过程中，将活着的对象往一端移动，移动完成后，</li>
+<li>直接清理掉边界外的内存。</li>
+</ul>
+</li>
+<li>v8中两种方法结合使用</li>
+</ul>
+</li>
+<li>Incremental Marking 增量标记<ul>
+<li>以上三种算法执行时，应用逻辑暂停，为“全停顿”（stop-the-world） </li>
+<li>老生代影响较大</li>
+<li>解决：一口气停顿完成的动作，拆分为小“步进”</li>
+<li>做一“步进”停下，就让应用逻辑执行，交替执行</li>
+</ul>
+</li>
+<li>延迟清理（lazy sweeping） 与增量式整理（incremental compaction）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>4、查看垃圾回收日志<ul>
+<li>–trace_gc 看耗时<ul>
+<li>node –trace_gc -e “var a &#x3D; [];for (var i &#x3D; 0; i &lt; 1000000; i++) a.push(new Array(100))”</li>
+<li>找出垃圾回收的哪些阶段比较<code>耗时</code></li>
+</ul>
+</li>
+<li>–prof<ul>
+<li>node –prof test01.js（5.1.js） &#x2F;&#x2F;放一个1000000的for循环</li>
+<li>得到一个v8.log日志文件，不具备可读性</li>
+<li>linux-tick-processor v8.log</li>
+<li>windows-tick-processor.bat v8.log<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 垃圾回收所占的时间为5.4%</span></span><br><span class="line">[<span class="variable constant_">GC</span>]:</span><br><span class="line">ticks total nonlib name</span><br><span class="line"><span class="number">2</span>     <span class="number">5.4</span>%</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2、高性能使用内存"><a href="#2、高性能使用内存" class="headerlink" title="2、高性能使用内存"></a>2、高性能使用内存</h4><blockquote>
+<p>了解作用域、闭包以更好的使用内存</p>
+</blockquote>
+<ul>
+<li>1、作用域 scope</li>
+<li>2、闭包<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一旦有变量引用这个中间函数， 这个中间函数将不会释放， 同时也会使原始的作用域不会得到释放， </span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> bar = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> local = <span class="string">&quot;局部变量&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> local;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">var</span> baz = <span class="title function_">bar</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">baz</span>());</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3、内存指标"><a href="#3、内存指标" class="headerlink" title="3、内存指标"></a>3、内存指标</h4><blockquote>
+<p>进程内存（v8堆内存）以及如何查看、堆外内存<br>1、查看内存使用</p>
+</blockquote>
+<ul>
+<li>查看进程内存<ul>
+<li>process.memoryUsage()(5.3.1.js)</li>
+<li>rss是resident set size的缩写， 即进程的常驻内存部分</li>
+<li>heapTotal 1367.99 MB heapUsed 1361.86 MB rss 1375.00 MB</li>
+</ul>
+</li>
+<li>查看系统内存<ul>
+<li>os模块中的totalmem()和freemem()<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">node</span><br><span class="line">&gt; os.<span class="title function_">totalmem</span>()</span><br><span class="line"><span class="number">8589934592</span></span><br><span class="line">&gt; os.<span class="title function_">freemem</span>()</span><br><span class="line"><span class="number">4527833088</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+2、堆外内存（5.3.2.js）</li>
+</ul>
+</li>
+<li>使用buffer做测试案例</li>
+<li>Process: heapTotal 5.85 MB heapUsed 1.85 MB rss 3012.91 MB</li>
+<li>heapTotal与heapUsed的变化极小，唯一变化的是rss的值</li>
+<li>Buffer对象,它不经过V8的内存分配机制，不会有堆内存的大小限制。</li>
+</ul>
+<h4 id="4、内存泄漏"><a href="#4、内存泄漏" class="headerlink" title="4、内存泄漏"></a>4、内存泄漏</h4><blockquote>
+<p>内存泄漏会出现在哪些方面：缓存、队列、作用域，以及解决方案</p>
+</blockquote>
+<ul>
+<li><p>缓存</p>
+</li>
+<li><p>队列消费不及时</p>
+</li>
+<li><p>作用域未释放</p>
+</li>
+<li><p>1、慎将内存当做缓存</p>
+<ul>
+<li>常用对象的键值对来缓存东西</li>
+<li>加上完善的过期策略以防止内存无限制增长，可以使用</li>
+<li><ol>
+<li>缓存限制策略，</li>
+</ol>
+<ul>
+<li>加一种策略限制无限增长，limitablemap一旦超出就先进先出淘汰</li>
+<li>模块机制中，模块编译后都会缓存，写模块时避免对象&#x2F;数组无限制增长，添加清空队列的相应接口</li>
+</ul>
+</li>
+<li><ol start="2">
+<li>缓存解决方案</li>
+</ol>
+<ul>
+<li>将缓存转移到外部：Redis、Memcached</li>
+<li>进程之间可以共享缓存。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>2、关注队列状态（数组）</p>
+<ul>
+<li>日志收集<ul>
+<li>表层解决方案：是换用消费速度更高的技术，换数据库为文件写入</li>
+<li>深度：监控队列长度，一旦堆积、报警；任意异步调用包含超时机制</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="5、内存泄漏排查"><a href="#5、内存泄漏排查" class="headerlink" title="5、内存泄漏排查"></a>5、内存泄漏排查</h4><blockquote>
+<p>内存泄漏排查工具，如何使用</p>
+</blockquote>
+<ul>
+<li>node-heapdump</li>
+<li>node-memwatch</li>
+<li>模块较久更新，现在应该有更新的排查工具</li>
+</ul>
+<h4 id="6、大内存应用"><a href="#6、大内存应用" class="headerlink" title="6、大内存应用"></a>6、大内存应用</h4><blockquote>
+<p>如何处理大文件：stream pipe</p>
+</blockquote>
+<ul>
+<li>stream模块处理大文件(5.6.js)</li>
+<li>fs的createReadStream()和createWriteStream()</li>
+<li>管道方法pipe()</li>
+<li>现在有功能更丰富的api，查阅node对应文档</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/kkkkh">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <!-- <span>/</span> -->
+        
+        
+        <span><a target="_blank" rel="noopener" href="https://gen.zhtk.top">gen</a></span>
+        
+        
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://med.zhtk.top">med</a></span>
+        
+        
+        <span>/</span>
+        
+        <span><a href="">京ICP备2021005439号</a></span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        <!-- Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p> -->
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://giscus.app/client.js"
+  data-repo="kkkkh/my-blog"
+  data-repo-id="R_kgDOLb1f6w"
+  data-category="Announcements"
+  data-category-id="DIC_kwDOLb1f684CduwR"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="light"
+  data-lang="zh-CN"
+  crossorigin="anonymous"
+  async>
+</script>
+
+
+
+
+</html>
