@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="kkkkh&#39;s blog">
+    <meta property="og:type" content="website">
+    <meta name="description" content="kkkkh&#39;s blog">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        《深入浅出Node.js》- 7网络编程 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Record and convert </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>kkkkh</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/categories">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>nav.categories</span>
+                </a>
+            </li> -->
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97"><span class="toc-text">服务模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OSI%E6%A8%A1%E5%9E%8B"><span class="toc-text">OSI模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81TCP"><span class="toc-text">1、TCP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81UDP"><span class="toc-text">2、UDP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81http"><span class="toc-text">3、http</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81websocket"><span class="toc-text">4、websocket</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E6%9C%8D%E5%8A%A1%E5%AE%89%E5%85%A8"><span class="toc-text">5、服务安全</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> Record and convert </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        《深入浅出Node.js》- 7网络编程
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2024-03-07 17:13:22</span></span>
+        <!-- 
+        </span> -->
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#server" title="server">server</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Nodejs" title="Nodejs">Nodejs</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <blockquote>
+<p>tcp、udp、http、htps、websocket中如何使用<br>还重点分析了websocket数据传输的过程、ssl&#x2F;tls和https如何进行数字签名</p>
+</blockquote>
+<h4 id="服务模块"><a href="#服务模块" class="headerlink" title="服务模块"></a>服务模块</h4><p>Node提供了net、dgram、http、https这4个模块，<br>分别用于处理TCP、UDP、HTTP、HTTPS，<br>适用于服务器端和客户端。</p>
+<p>net -&gt; TCP  &#x3D;&gt; tls -&gt; TLS&#x2F;SSL加密的TCP连接上<br>dgram -&gt; UDP<br>http -&gt; HTTP &#x3D;&gt; https -&gt; HTTPS</p>
+<h4 id="OSI模型"><a href="#OSI模型" class="headerlink" title="OSI模型"></a>OSI模型</h4><p><img src="/./img/7.1.png"></p>
+<h4 id="1、TCP"><a href="#1、TCP" class="headerlink" title="1、TCP"></a>1、TCP</h4><ul>
+<li>传输之前需要3次握手形成会话</li>
+<li>创建会话</li>
+<li>测试<ul>
+<li>创建服务端(7.1.1.js)</li>
+<li>telnet 127.0.0.1 8124</li>
+<li>nc -U &#x2F;tmp&#x2F;echo.sock （前提对domain socket监听 server.listen(‘&#x2F;tmp&#x2F;echo.sock’);</li>
+<li>net模块自行构造客户端进行会话(7.1.2.js)</li>
+</ul>
+</li>
+</ul>
+<h4 id="2、UDP"><a href="#2、UDP" class="headerlink" title="2、UDP"></a>2、UDP</h4><ul>
+<li>UDP 不是面向连接的、直接传输</li>
+<li>DNS服务即是基于它实现的。</li>
+</ul>
+<h4 id="3、http"><a href="#3、http" class="headerlink" title="3、http"></a>3、http</h4><ul>
+<li>http<ul>
+<li>HTTP标准为RFC 2616</li>
+<li>curl -v <a target="_blank" rel="noopener" href="http://127.0.0.1:1337/">http://127.0.0.1:1337</a></li>
+<li>报文开头：经典的TCP的3次握手过程</li>
+<li>请求、响应：都包含报文头和报文体，get请求没有报文体</li>
+</ul>
+</li>
+<li>http 模块<ul>
+<li>http 封装 net（tcp）</li>
+<li>HTTP服务以request为单位进行服务。 </li>
+<li>http模块即是将connection到request的过程进行了封装，</li>
+<li>对二进制的数据进行解析：请求、响应过程中</li>
+</ul>
+</li>
+<li>客户端<ul>
+<li>http响应<ul>
+<li>ClientRequest在解析响应报文时， </li>
+<li>一解析完响应头就触发response事件， </li>
+<li>同时传递一个响应对象以供操作ClientResponse</li>
+</ul>
+</li>
+<li>http代理<ul>
+<li>最多可以创建5个连接，实际是一个线程池</li>
+<li>需要修改<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> agent = <span class="keyword">new</span> http.<span class="title class_">Agent</span>(&#123;</span><br><span class="line">  <span class="attr">maxSockets</span>: <span class="number">10</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">  <span class="attr">hostname</span>: <span class="string">&#x27;127.0.0.1&#x27;</span>,</span><br><span class="line">  <span class="attr">port</span>: <span class="number">1334</span>,</span><br><span class="line">  <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">  <span class="attr">agent</span>: agent</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>agent为false，脱离连接池的管理，不受并发的限制。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4、websocket"><a href="#4、websocket" class="headerlink" title="4、websocket"></a>4、websocket</h4><ul>
+<li>优点：<ul>
+<li>事件变成</li>
+<li>长连接</li>
+<li>只建立一个tcp连接</li>
+<li>数据可以推动到客户端，双向通信</li>
+<li>更轻量级的协议头</li>
+</ul>
+</li>
+<li>Comet技术 长轮询（过时）</li>
+<li>WebSocket与HTTP的区别<ul>
+<li>相比HTTP,WebSocket更接近于传输层协议，在TCP上定义独立的协议。</li>
+<li>让人迷惑的部分在于WebSocket的握手部分：是由HTTP完成的，使人觉得它可能是基于HTTP实现的。</li>
+</ul>
+</li>
+</ul>
+<p>1、握手</p>
+<ul>
+<li>请求<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">GET</span> <span class="string">/chat</span> <span class="string">HTTP/1.1</span>        </span><br><span class="line"><span class="attr">Host:</span> <span class="string">server.example.com</span> </span><br><span class="line"><span class="comment"># 升级协议为WebSocket </span></span><br><span class="line"><span class="attr">Upgrade:</span> <span class="string">websocket</span>        </span><br><span class="line"><span class="attr">Connection:</span> <span class="string">Upgrade</span>        </span><br><span class="line"><span class="comment"># 用于安全校验</span></span><br><span class="line"><span class="comment"># 随机生成的Base64编码的字符串</span></span><br><span class="line"><span class="comment"># 服务器端接收到之后将其与字符串258EAFA5-E914-47DA-95CAC5AB0DC85B11相连</span></span><br><span class="line"><span class="comment"># 然后通过sha1安全散列算法计算出结果后，Base64编码，返回给客户端</span></span><br><span class="line"><span class="attr">Sec-WebSocket-Key:</span> <span class="string">dGhlIHNhbXBsZSBub25jZQ==</span>        </span><br><span class="line"><span class="comment"># 子协议和版本号  </span></span><br><span class="line"><span class="attr">Sec-WebSocket-Protocol:</span> <span class="string">chat,</span> <span class="string">superchat</span></span><br><span class="line"><span class="attr">Sec-WebSocket-Version:</span> <span class="number">13</span></span><br></pre></td></tr></table></figure></li>
+<li>响应<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">HTTP/1.1101</span> <span class="string">Switching</span> <span class="string">Protocols</span></span><br><span class="line"><span class="comment"># 更新应用层协议为WebSocket协议</span></span><br><span class="line"><span class="attr">Upgrade:</span> <span class="string">websocket</span>        </span><br><span class="line"><span class="attr">Connection:</span> <span class="string">Upgrade</span>    </span><br><span class="line"><span class="comment"># 基于Sec-WebSocket-Key生成的字符串 </span></span><br><span class="line"><span class="comment"># 客户端将会校验Sec-WebSocket-Accept的值，如果成功，将开始接下来的数据传输   </span></span><br><span class="line"><span class="attr">Sec-WebSocket-Accept:</span> <span class="string">s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</span>        </span><br><span class="line"><span class="attr">Sec-WebSocket-Protocol:</span> <span class="string">chat</span></span><br></pre></td></tr></table></figure>
+2、数据传输<ul>
+<li>send<ul>
+<li>将这个数据封装为一帧或多帧数据， 然后逐帧发送</li>
+</ul>
+</li>
+<li>安全<ul>
+<li>客户端需要对发送的数据帧进行<code>掩码处理</code>，服务器一旦收到无掩码帧（比如中间拦截破坏），连接将关闭。</li>
+<li>而服务器发送到客户端的数据帧则无须做掩码处理，同样，如果客户端收到带掩码的数据帧，连接也将关闭。</li>
+</ul>
+</li>
+<li>数据帧<ul>
+<li>WebSocket数据帧的定义，每8位为一列，也即1个字节。其中每一位都有它的意义</li>
+<li>fin： <ul>
+<li>如果这个数据帧是最后一帧， 这个fin位为1， 其余情况为0。 </li>
+<li>当一个数据没有被分为多帧时， 它既是第一帧也是最后一帧。</li>
+</ul>
+</li>
+<li>rsv1、 rsv2、 rsv3： <ul>
+<li>各为1位长， 3个标识用于扩展， 当有已协商的扩展时， 这些值可能为1， 其余情况为0。</li>
+</ul>
+</li>
+<li>opcode： <ul>
+<li>长为4位的操作码， 可以用来表示0到15的值， 用于解释当前数据帧。 </li>
+<li>0表示附加数据帧， 1表示文本数据帧， 2表示二进制数据帧， 8表示发送一个连接关闭的数据帧， 9表示ping数据帧， </li>
+<li>10表示pong数据帧， 其余值暂时没有定义。 </li>
+<li>ping数据帧和pong数据帧用于心跳检测， 当一端发送ping数据帧时， 另一端必须发送pong数据帧作为响应， 告知对方这一端仍然处于响应状态。</li>
+</ul>
+</li>
+<li>masked： <ul>
+<li>表示<code>是否进行掩码处理</code>， 长度为1。 客户端发送给服务器端时为1， 服务器端发送给客户端时为0。</li>
+</ul>
+</li>
+<li>payload length： <ul>
+<li>一个7、 7+16或7+64位长的数据位， 标识数据的长度， 如果值在0~125之间， 那么该值就是数据的真实长度； </li>
+<li>如果值是126， 则后面16位的值是数据的真实长度； </li>
+<li>如果值是127， 则后面64位的值是数据的真实长度。</li>
+</ul>
+</li>
+<li>masking key： <ul>
+<li>当masked为1时存在， 是一个32位长的数据位， 用于解密数据。</li>
+</ul>
+</li>
+<li>payload data： <ul>
+<li>我们的目标数据， 位数为8的倍数。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>服务端处理<ul>
+<li>服务端接受，解析，通过掩码解密，触发onmessage</li>
+<li>服务端响应，无需掩码，其他相同</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="5、服务安全"><a href="#5、服务安全" class="headerlink" title="5、服务安全"></a>5、服务安全</h4><ul>
+<li>SSL作为一种安全协议（Secure Sockets Layer，安全套接层）- 传输层提供对网络连接加密</li>
+<li>随后IETF将其标准化，称为TLS（Transport Layer Security，安全传输层协议）</li>
+<li>crypto、 加密解密</li>
+<li>tls、 针对net tec</li>
+<li>https、针对http<br>1、TLS&#x2F;SSL<ul>
+<li>TLS&#x2F;SSL是一个公钥&#x2F;私钥的结构，它是一个非对称的结构</li>
+<li>1、客户端和服务器分别生成公钥、私钥；<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成服务器端私钥</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">openssl genrsa -out server.key 1024</span>        </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成客户端私钥</span>        </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">openssl genrsa -out client.key 1024</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成公钥</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">openssl rsa -<span class="keyword">in</span> server.key -pubout -out server.pem</span>       </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">openssl rsa -<span class="keyword">in</span> client.key -pubout -out client.pem</span></span><br></pre></td></tr></table></figure></li>
+<li>2、客户端和服务器端互换公钥，使用对方的公钥进行加密；</li>
+<li>3、中间人攻击，<ul>
+<li>中间人对客户端扮演服务器端的角色， </li>
+<li>对服务器端扮演客户端的角色，</li>
+<li>为了解决这个问题， TLS&#x2F;SSL引入了数字证书来进行认证、</li>
+<li>数字证书包括：<ul>
+<li>1、服务器的名称和主机名、</li>
+<li>2、服务器的公钥、</li>
+<li>3、签名颁发机构的名称、</li>
+<li>4、来自签名颁发机构的签名；</li>
+</ul>
+</li>
+<li>通过证书中的签名，确认收到的公钥是来自目标服务器的；</li>
+</ul>
+</li>
+<li>4、数字证书<ul>
+<li>CA数字证书认证中心<ul>
+<li>为站点颁发证书， 且这个证书中具有CA通过自己的公钥和私钥实现的<code>签名</code>。</li>
+<li>为了得到签名证书，</li>
+<li>服务器需要通过自己的私钥生成CSR（Certificate Signing Request，证书签名请求）文件</li>
+<li>CA机构将通过这个文件颁发属于该服务器端的签名证书，</li>
+<li>通过CA机构就能验证证书是否合法。</li>
+<li>自签名证书：自己扮演CA机构</li>
+<li>CA：<ul>
+<li>生成私钥、</li>
+<li>生成CSR文件、</li>
+<li>通过私钥自签名生成证书（扮演CA角色需要的文件）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ openssl genrsa -out ca.key 1024        </span><br><span class="line">$ openssl req -new -key ca.key -out ca.csr        </span><br><span class="line">$ openssl x509-req -<span class="keyword">in</span> ca.csr -signkey ca.key -out ca.crt</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>服务器：<ul>
+<li>生成CSR文件、</li>
+<li>得到签名证书<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ openssl req -new -key server.key -out server.csr</span><br><span class="line">$ openssl x509-req -CA ca.crt -CAkey ca.key -CAcreateserial -<span class="keyword">in</span> server.csr -out server.crt</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>过程<ul>
+<li>CA将证书颁发给服务器端</li>
+<li>客户端先会去获取服务器端的证书</li>
+<li>通过CA验证真假（还有服务器名称、IP地址验证）</li>
+<li>知名的CA机构，它们的证书一般预装在浏览器中，不需要再从服务器获取了</li>
+<li>根证书：不需要上级参与签名的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>2、TLS服务（&#x2F;tls）</p>
+<ul>
+<li>客户端：也需要生成CA证书，双向确认身份<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建私钥</span></span><br><span class="line">$ openssl genrsa -out client.<span class="property">key</span> <span class="number">1024</span></span><br><span class="line"><span class="comment">// 生成CSR</span></span><br><span class="line">$ openssl req -<span class="keyword">new</span> -key client.<span class="property">key</span> -out client.<span class="property">csr</span></span><br><span class="line"><span class="comment">// 生成签名证书</span></span><br><span class="line">$ openssl x509 -req -<span class="variable constant_">CA</span> ca.<span class="property">crt</span> -<span class="title class_">CAkey</span> ca.<span class="property">key</span> -<span class="title class_">CAcreateserial</span> -<span class="keyword">in</span> client.<span class="property">csr</span> -out client.<span class="property">crt</span></span><br></pre></td></tr></table></figure>
+3、https服务（&#x2F;https）</li>
+<li>直接用上文生成的私钥和证书。</li>
+<li>curl<ul>
+<li>curl <a target="_blank" rel="noopener" href="https://localhost:8000/">https://localhost:8000/</a> 抛错，无法验证服务器端证书是否正确，</li>
+<li>curl -k <a target="_blank" rel="noopener" href="https://localhost:8000/">https://localhost:8000/</a> 忽略掉证书的验证</li>
+<li>curl –cacert keys&#x2F;ca.crt <a target="_blank" rel="noopener" href="https://localhost:8000/">https://localhost:8000/</a> 告知CA证书使之完成对服务器证书的验证</li>
+</ul>
+</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/kkkkh">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <!-- <span>/</span> -->
+        
+        
+        <span><a target="_blank" rel="noopener" href="https://gen.zhtk.top">gen</a></span>
+        
+        
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://med.zhtk.top">med</a></span>
+        
+        
+        <span>/</span>
+        
+        <span><a href="">京ICP备2021005439号</a></span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        <!-- Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p> -->
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://giscus.app/client.js"
+  data-repo="kkkkh/my-blog"
+  data-repo-id="R_kgDOLb1f6w"
+  data-category="Announcements"
+  data-category-id="DIC_kwDOLb1f684CduwR"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="light"
+  data-lang="zh-CN"
+  crossorigin="anonymous"
+  async>
+</script>
+
+
+
+
+</html>

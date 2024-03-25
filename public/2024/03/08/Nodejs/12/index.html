@@ -12,7 +12,7 @@
 
     <title>
         
-        About - undefined
+        《深入浅出Node.js》- 12附录 - undefined
         
     </title>
 
@@ -99,7 +99,7 @@
                     <span>收藏</span>
                 </a>
             </li>
-            <li  class=active >
+            <li >
                 <a href="/about/">
                     <i class="iconfont icon-guanyu2"></i>
                     <span>关于</span>
@@ -115,6 +115,10 @@
             
         </ul>
     </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E8%AF%95Node"><span class="toc-text">调试Node</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Node%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83"><span class="toc-text">Node编码规范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E5%B1%80%E5%9F%9FNPM%E4%BB%93%E5%BA%93"><span class="toc-text">搭建局域NPM仓库</span></a></li></ol>
+</div>
     
 </div>
 
@@ -141,22 +145,120 @@
     <div class="index-middle">
         <!-- Main Content -->
         
-<div class="post-content no-indent">
-    <p>个人思考记录</p>
-<ul>
-<li>2024.3.6<br>很多知识都是知其然，不知其所以然<br>多读一些经典书籍，并且读透，转换为自己的知识，便可做到知其所以然<br>才是真的提升<br>希望在今后，坚持此道</li>
+
+
+<div class="post-container">
+    <div class="post-title">
+        《深入浅出Node.js》- 12附录
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2024-03-08 18:13:22</span></span>
+        <!-- 
+        </span> -->
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#server" title="server">server</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Nodejs" title="Nodejs">Nodejs</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <blockquote>
+<p>摘取附录中一些有用信息并更新：node如何在浏览器中调试、编码规范、搭建企业NPM仓库</p>
+</blockquote>
+<h4 id="调试Node"><a href="#调试Node" class="headerlink" title="调试Node"></a>调试Node</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://nodejs.org/en/learn/getting-started/debugging">新 debugging nodejs</a></li>
+<li>node –inspect 12.2.js 启动服务</li>
+<li>打开Chrome浏览器，chrome:&#x2F;&#x2F;inspect</li>
+<li>确保你的Node.js应用程序正在运行。(代码中加个setTimeout 5就可以)</li>
+<li>在”Remote Target”部分，你应该看到你的Node.js进程</li>
 </ul>
-<p>但是如何读透，转换为自己的知识呢？<br>例如之前读一本技术相关书籍，会注重每一个细节，甚至将每一个案例都进行代码测试，<br>读完以后觉得，都基本读懂了<br>但是过了一段时间就忘记了，回想起来只剩下一个大致印象，也就剩10-20%了<br>无法真正内化为自己的知识，</p>
-<p>这不是读透，我今日理解的读透，转化<br>应该是读完以后，从大的层面着眼，一本首先有一个结构，主要在都讲了什么<br>假如这个本书有10章节，每个章节在说什么，强调了什么，再去深入下去<br>从上而下的读，更容易理解，哪怕后边记不清细节，也可以按此结构查找，<br>否则迷失在了细节中</p>
+<h4 id="Node编码规范"><a href="#Node编码规范" class="headerlink" title="Node编码规范"></a>Node编码规范</h4><ul>
+<li>Douglas Crockford<ul>
+<li>JSON、 JSLint、 JSMin和ADSafe之父</li>
+<li>JavaScript: TheGood Parts</li>
+</ul>
+</li>
+<li>编码规范<ul>
+<li>空格与格式 eslint</li>
+<li>命名规范</li>
+<li>作用域 with eval</li>
+<li>数组与对象<ul>
+<li>使用for in的异同(12.3.js)</li>
+</ul>
+</li>
+<li>注解规范 <ul>
+<li>dox的注释规范 来源 jsDoc</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>实践<ul>
+<li>precommit这样的钩子脚本</li>
+</ul>
+</li>
+</ul>
+<h4 id="搭建局域NPM仓库"><a href="#搭建局域NPM仓库" class="headerlink" title="搭建局域NPM仓库"></a>搭建局域NPM仓库</h4><blockquote>
+<p>如何搭建、为什么搭建、如何优化</p>
+</blockquote>
 <ul>
-<li>2024.3.14<br>林语堂曾经说过：“凡学英语，必学整句，不觉中将其句法音调整个吸入。<br>每日选二三句，回环熟诵，此数句读音必正，出口必熟。如此半年，操英语能力必大进。”</li>
+<li>搭建（过时）<ul>
+<li>CouchDB 基于Erlang语言编写</li>
+<li>两部分 www（界面）、registry（存储、api） </li>
+<li>安装Erlang和CouchDB、搭建npm服务</li>
+<li>同步官方仓库<ul>
+<li>replicate实现 调取CouchDB接口，获取变动细节，同步缺失以及定时任务</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>意义<ul>
+<li>解决：私有模块、网络稳定性影响安装速度、隐私问题安全问题</li>
+<li>未解决：模块质量和版本控制中存在的风险</li>
+</ul>
+</li>
+<li>优化方法<ul>
+<li>加入审核机制以及按需同步</li>
+<li>1、全量同步变为按需同步：同步指定模块</li>
+<li>2、审核机制：<ul>
+<li>公共模块：同步工程加审核机制，审核模块质量和安全、控制同步模块的权限，审核成功自动按需同步</li>
+<li>企业私有模块：模块应该属于团队非个人、设置团队账号、管理员控制用户、团队账号发布、同时增加审核流程</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>更新<ul>
+<li>最新搭建方法：<ul>
+<li>npm Enterprise<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.npmjs.com/enterprise">npm Enterprise 废弃</a>  -&gt; <a target="_blank" rel="noopener" href="https://docs.github.com/en/packages/learn-github-packages/publishing-a-package">github packages</a> npm被github收购</li>
+<li>实际是GitHub Packages充当了，私有库的角色，可以发布私有包，设置访问权限，供公司内部使用</li>
+<li>github packages集成了多种包，包含npm，<a target="_blank" rel="noopener" href="https://docs.github.com/zh/packages/working-with-a-github-packages-registry/working-with-the-npm-registry">参考</a></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://verdaccio.org/docs/what-is-verdaccio">Verdaccio</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
-    
-    <div id="comment-container"></div>
-    <div id="disqus_thread"></div>
-    <div class="giscus"></div>
-    <div id="lv-container"></div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
 </div>
 
     </div>
@@ -223,7 +325,7 @@
     // We expose some of the variables needed by the front end
     window.hexo_search_path = "search.json"
     window.hexo_root = "/"
-    window.isPost = false
+    window.isPost = true
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 

@@ -117,7 +117,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81V8%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%E4%B8%8E%E5%86%85%E5%AD%98%E9%99%90%E5%88%B6"><span class="toc-text">1、V8的垃圾回收机制与内存限制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E9%AB%98%E6%80%A7%E8%83%BD%E4%BD%BF%E7%94%A8%E5%86%85%E5%AD%98"><span class="toc-text">2、高性能使用内存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%86%85%E5%AD%98%E6%8C%87%E6%A0%87"><span class="toc-text">3、内存指标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="toc-text">4、内存泄漏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%8E%92%E6%9F%A5"><span class="toc-text">5、内存泄漏排查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81%E5%A4%A7%E5%86%85%E5%AD%98%E5%BA%94%E7%94%A8"><span class="toc-text">6、大内存应用</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81V8%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%E4%B8%8E%E5%86%85%E5%AD%98%E9%99%90%E5%88%B6"><span class="toc-text">1、V8的垃圾回收机制与内存限制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E9%AB%98%E6%80%A7%E8%83%BD%E4%BD%BF%E7%94%A8%E5%86%85%E5%AD%98"><span class="toc-text">2、高性能使用内存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%86%85%E5%AD%98%E6%8C%87%E6%A0%87"><span class="toc-text">3、内存指标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="toc-text">4、内存泄漏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%8E%92%E6%9F%A5"><span class="toc-text">5、内存泄漏排查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81%E5%A4%A7%E5%86%85%E5%AD%98%E5%BA%94%E7%94%A8"><span class="toc-text">6、大内存应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E6%A1%88%E4%BE%8B%E5%9B%9E%E9%A1%BE"><span class="toc-text">实际案例回顾</span></a></li></ol>
 </div>
     
 </div>
@@ -153,7 +153,7 @@
     </div>
 
     <div class="post-meta">
-        <span class="attr">发布于：<span>2024-03-10 16:13:22</span></span>
+        <span class="attr">发布于：<span>2024-03-07 15:13:22</span></span>
         <!-- 
         </span> -->
         
@@ -172,7 +172,10 @@
 </span>
     </div>
     <div class="post-content no-indent">
-        <h4 id="1、V8的垃圾回收机制与内存限制"><a href="#1、V8的垃圾回收机制与内存限制" class="headerlink" title="1、V8的垃圾回收机制与内存限制"></a>1、V8的垃圾回收机制与内存限制</h4><blockquote>
+        <blockquote>
+<p>一个是垃圾回收：原理、如何查看；一个是内存：进程内存、堆外内存、内存泄漏原因以及排查等</p>
+</blockquote>
+<h4 id="1、V8的垃圾回收机制与内存限制"><a href="#1、V8的垃圾回收机制与内存限制" class="headerlink" title="1、V8的垃圾回收机制与内存限制"></a>1、V8的垃圾回收机制与内存限制</h4><blockquote>
 <p>v8内存限制大小，为什么限制、垃圾回收机制、以及如何查看垃圾回收日志</p>
 </blockquote>
 <ul>
@@ -351,6 +354,25 @@
 <li>fs的createReadStream()和createWriteStream()</li>
 <li>管道方法pipe()</li>
 <li>现在有功能更丰富的api，查阅node对应文档</li>
+</ul>
+<h4 id="实际案例回顾"><a href="#实际案例回顾" class="headerlink" title="实际案例回顾"></a>实际案例回顾</h4><ul>
+<li>背景：<ul>
+<li>项目（直播平台），为了更好地seo，从前端项目升级为node项目，使用nuxt框架，单页面升级到ssr，</li>
+</ul>
+</li>
+<li>代码迁移工作：<ul>
+<li>nuxt支持vue，将之前代码js vue vuex状态管理，一并迁移，</li>
+<li>未更新vuex状态管理使用方法，</li>
+<li>导致数据错乱，一个直播间，会闪现别的直播间的数据</li>
+<li>为什么未更新vuex状态管理使用方法就导致这个问题？</li>
+</ul>
+</li>
+<li>分析：<ul>
+<li>1、由原前端浏览器环境，变为node服务器环境，对于访问用户而言，原来这套js每个浏览器下载一遍，数据不共用，而现在服务器端这套js大家是共用的；</li>
+<li>2、vue状态管理的代码逻辑是，将主要的数据存储到了对象，这个对象大家是共用的，当多个用户大量访问，延时未及时更新时，就会出现错乱现象；</li>
+<li>3、更新vuex的使用方法，vuex中存储的对象，改为函数调用返回一个新对象，做到数据的隔离，则问题解决</li>
+</ul>
+</li>
 </ul>
 
         

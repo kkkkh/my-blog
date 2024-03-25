@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="kkkkh&#39;s blog">
+    <meta property="og:type" content="website">
+    <meta name="description" content="kkkkh&#39;s blog">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        《深入浅出Node.js》- 10测试 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Record and convert </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>kkkkh</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/categories">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>nav.categories</span>
+                </a>
+            </li> -->
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="toc-text">单元测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%AE%E5%89%8D%E4%BD%BF%E7%94%A8%E6%A1%86%E6%9E%B6%EF%BC%9A"><span class="toc-text">目前使用框架：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">性能测试</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> Record and convert </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        《深入浅出Node.js》- 10测试
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2024-03-08 16:13:22</span></span>
+        <!-- 
+        </span> -->
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#server" title="server">server</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Nodejs" title="Nodejs">Nodejs</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <blockquote>
+<p>从单元测试、性能测试两个维度进行讲解，重视测试，并在项目中使用，事半功倍</p>
+</blockquote>
+<h4 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h4><p>好代码，比较好写单元测试，相互促进<br>不好的代码，需要重构，再写单元测试</p>
+<ul>
+<li>原则<ul>
+<li>1、单一职责，一段代码只做一件事，方便编写测试</li>
+<li>2、接口抽象，针对接口进行测试，具体实现变化不影响测试单元</li>
+<li>3、层次分离，mvc 逐层测试，逐层保证</li>
+</ul>
+</li>
+<li>1、断言：断言就是单元测试中用来“保证最小单元是否正常”的检测方法；<ul>
+<li>测试第一步，看功能是否正常，对基本的判断；</li>
+<li>assert 模块：断言库大多都是基于assert模块进行封装和扩展的，这包括著名的should.js断言库</li>
+</ul>
+</li>
+<li>2．测试框架：<ul>
+<li>断言检查失败会停止整个应用</li>
+<li>实际应该：记录下抛出的异常并继续执行，最后生成测试报告；应用测试框架</li>
+<li>它本身并不参与测试， 主要用于管理测试用例和生成测试报告，</li>
+<li>mocha<ul>
+<li>测试风格<ul>
+<li>TDD 测试驱动开发 suite test<ul>
+<li>TDD关注所有功能是否被正确实现，每一个功能都具备对应的测试用例</li>
+<li>TDD的表述方式偏向于功能说明书的风格</li>
+</ul>
+</li>
+<li>BDD 行为驱动开发 describe it<ul>
+<li>BDD关注整体行为是否符合预期，适合自顶向下的设计方式</li>
+<li>BDD的表述方式更接近于自然语言的习惯</li>
+</ul>
+</li>
+<li>单元测试框架 mocha</li>
+</ul>
+</li>
+<li>测试报告<ul>
+<li>报告格式 <ul>
+<li>mocha –reporters 可以查看所有报告格式</li>
+<li>mocha -R json</li>
+<li>json 通用、html-cov 可视化查看代码覆盖率</li>
+</ul>
+</li>
+<li>看文档</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3、测试代码的文件组织<ul>
+<li>测试代码放test文件夹</li>
+</ul>
+</li>
+<li>4、测试用例<ul>
+<li>基本包括：至少一个断言、正向测试和反向测试</li>
+<li>(对于node还有)异步测试 done、超时设置如何设置 this.timeout(500)</li>
+</ul>
+</li>
+<li>5、测试覆盖率：（重要指标）<ul>
+<li>如何判断单元测试对代码的覆盖情况， 我们需要直观的工具来体现。 </li>
+<li>jscover模块 （java）、lanket模块 （纯js模块，解决jscover不足）（都过时）</li>
+</ul>
+</li>
+<li>6、mock<ul>
+<li>模拟异常</li>
+<li>我们通过伪造fs.readFileSync()方法抛出错误来触发异常。</li>
+<li>同时为了保证该测试用例不影响其余用例，我们需要在执行完后还原它</li>
+<li>推荐模块 muk（过时）</li>
+</ul>
+</li>
+<li>7、私有方法<ul>
+<li>rewire模块提供了一种巧妙的方式实现对私有方法的访问。</li>
+<li>原理：引入文件，设置全局__get__()方法，eavl执行</li>
+</ul>
+</li>
+<li>8、工程化、自动化<ul>
+<li>工程化 Makefile</li>
+<li>持续集成 travis-ci</li>
+</ul>
+</li>
+<li>其他：<ul>
+<li>supertest 支持express等web框架测试</li>
+</ul>
+</li>
+</ul>
+<h4 id="目前使用框架："><a href="#目前使用框架：" class="headerlink" title="目前使用框架："></a>目前使用框架：</h4><ul>
+<li>之前都是偏于零散模块处理，单元测试，后边发展出集成度高的测试框架Jest等</li>
+<li>后端：<ul>
+<li><a target="_blank" rel="noopener" href="https://jestjs.io/docs/getting-started">jest</a> 内置断言库、配置相对简单（前端也可以）</li>
+<li><a target="_blank" rel="noopener" href="https://mochajs.org/">mocha</a> 丰富、灵活可定制</li>
+<li>Tap 小众</li>
+</ul>
+</li>
+<li>前端交互：<ul>
+<li><a target="_blank" rel="noopener" href="https://pptr.dev/">Puppeteer</a><ul>
+<li>擅长测试前端交互和用户体验</li>
+<li>api简单高效</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://www.cypress.io/">cypress</a><ul>
+<li>不仅适用于测试 Web 应用程序</li>
+<li>还可以用于数据爬取、屏幕截图、性能分析等更广泛的用途</li>
+<li>api更丰富</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h4><ul>
+<li>检测已有功能是否能满足生产环境的性能要求，能否承担实际业务带来的压力</li>
+<li>负载测试</li>
+<li>1、基准测试<ul>
+<li>在多少时间内执行了多少次某个方法</li>
+<li>benchmark模块<ul>
+<li>并不简单的统计次数时间</li>
+<li>它对测试有着严密的抽样过程</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2、压力测试<ul>
+<li>吞吐率、</li>
+<li>响应时间、</li>
+<li>并发数</li>
+<li>工具：<ul>
+<li>ab、<ul>
+<li>ab -c 10 -t 3 <a target="_blank" rel="noopener" href="http://localhost:8001/">http://localhost:8001/</a></li>
+<li>十个并发数、3秒内</li>
+<li>Requests per second：<ul>
+<li>这是我们重点关注的一个值，它表示服务器每秒能处理多少请求，是重点反映服务器并发能力的指标。</li>
+<li>这个值又称RPS或QPS。</li>
+</ul>
+</li>
+<li>结果的每一个字段的意义，可以查看书中具体的对应解释</li>
+</ul>
+</li>
+<li>siege、</li>
+<li>http_load</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3、基准测试驱动开发 BDD<ul>
+<li>Benchmark Driven Development</li>
+<li>大致思路：<ul>
+<li>(1) 写基准测试。(2) 写&#x2F;改代码。(3) 收集数据。(4) 找出问题。(5)回到第(2)步。</li>
+</ul>
+</li>
+<li>帮助写测试</li>
+</ul>
+</li>
+<li>4、测试数据与业务数据的转换<ul>
+<li>评估业务量，以便系统可以胜任在线任务量</li>
+<li>假设每天访问量是100w，集中在10小时以内，</li>
+<li>那么100w&#x2F;100h&#x3D; qp约等于27.7，</li>
+<li>每秒处理27.7个请求才能胜任业务</li>
+</ul>
+</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/kkkkh">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <!-- <span>/</span> -->
+        
+        
+        <span><a target="_blank" rel="noopener" href="https://gen.zhtk.top">gen</a></span>
+        
+        
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://med.zhtk.top">med</a></span>
+        
+        
+        <span>/</span>
+        
+        <span><a href="">京ICP备2021005439号</a></span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        <!-- Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p> -->
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://giscus.app/client.js"
+  data-repo="kkkkh/my-blog"
+  data-repo-id="R_kgDOLb1f6w"
+  data-category="Announcements"
+  data-category-id="DIC_kwDOLb1f684CduwR"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="light"
+  data-lang="zh-CN"
+  crossorigin="anonymous"
+  async>
+</script>
+
+
+
+
+</html>

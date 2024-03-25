@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="kkkkh&#39;s blog">
+    <meta property="og:type" content="website">
+    <meta name="description" content="kkkkh&#39;s blog">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        《深入浅出Node.js》- 9进程 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Record and convert </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>kkkkh</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/categories">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>nav.categories</span>
+                </a>
+            </li> -->
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E6%9B%B4%E5%A5%BD%E7%9A%84%E4%BD%BF%E7%94%A8node"><span class="toc-text">1、更好的使用node</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%8F%98%E8%BF%81"><span class="toc-text">2、服务器模型的变迁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%A4%9A%E8%BF%9B%E7%A8%8B%E6%9E%B6%E6%9E%84"><span class="toc-text">3、多进程架构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E9%9B%86%E7%BE%A4%E7%A8%B3%E5%AE%9A%E4%B9%8B%E8%B7%AF"><span class="toc-text">4、集群稳定之路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81Cluster-%E6%A8%A1%E5%9D%97%EF%BC%889-5-cluster%EF%BC%89"><span class="toc-text">5、Cluster 模块（9.5&#x2F;cluster）</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> Record and convert </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        《深入浅出Node.js》- 9进程
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2024-03-08 15:13:22</span></span>
+        <!-- 
+        </span> -->
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#server" title="server">server</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Nodejs" title="Nodejs">Nodejs</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h4 id="1、更好的使用node"><a href="#1、更好的使用node" class="headerlink" title="1、更好的使用node"></a>1、更好的使用node</h4><ul>
+<li>充分利用多核cpu服务器</li>
+<li>保证进程的健壮性、稳定性：单线程一旦异常、引起珍格格进程崩溃</li>
+</ul>
+<h4 id="2、服务器模型的变迁"><a href="#2、服务器模型的变迁" class="headerlink" title="2、服务器模型的变迁"></a>2、服务器模型的变迁</h4><table>
+<thead>
+<tr>
+<th>date</th>
+<th>进程数</th>
+<th>特点</th>
+<th>qps(每秒查询率)</th>
+<th>服务器</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>石器时代：同步</td>
+<td>1</td>
+<td>一个请求N秒</td>
+<td>1&#x2F;N</td>
+<td></td>
+</tr>
+<tr>
+<td>青铜时代：复制进程</td>
+<td>M</td>
+<td>进程数上限M</td>
+<td>M&#x2F;N</td>
+<td></td>
+</tr>
+<tr>
+<td>白银时代：多线程</td>
+<td>M*L（线程数）</td>
+<td>一个线程服务一个请求；每个线程占用内存；频繁切换上下文；</td>
+<td>M*L&#x2F;N</td>
+<td>Apache：C10k问题</td>
+</tr>
+<tr>
+<td>黄金时代：事件驱动</td>
+<td></td>
+<td>Cpu的利用率、健壮性；php：没有线程的支持、每个请求建立独立的上下文；Node：所有的请求的上下文是统一的、CPU的计算能力</td>
+<td></td>
+<td>Node与Nginx、Php</td>
+</tr>
+</tbody></table>
+<h4 id="3、多进程架构"><a href="#3、多进程架构" class="headerlink" title="3、多进程架构"></a>3、多进程架构</h4><blockquote>
+<p>实现了只监听一个端口，多进程服务的架构</p>
+</blockquote>
+<ul>
+<li>Master-Worker模式，又称主从模式(9.3.1&#x2F;master.js和worker.js)</li>
+<li>创建子进程<ul>
+<li>child_process 四个方法的区别spawn、exec、execFile、fork(9.3.2&#x2F;child.js)</li>
+</ul>
+</li>
+<li>通信：<ul>
+<li>进行send发送，message事件接受(9.3.3&#x2F;IPC&#x2F;)</li>
+<li>通信原理：IPC <ul>
+<li>Inter-Process Communication，即进程间通信</li>
+<li>使用的是管道（pipe）技术</li>
+<li>实现：<ul>
+<li>Windows 命名管道（named pipe）实现，</li>
+<li>*nix Unix Domain Socket实现</li>
+</ul>
+</li>
+<li>原理：<ul>
+<li>1、父进程再创建子进程前，会创建IPC通道并监听它；</li>
+<li>2、再去创建子进程，通过NODE_CHANNEL_FD告诉子进程IPC通道的文件描述符；</li>
+<li>3、子进程启动时，根据文件描述符，连接IPC通道；</li>
+<li>系统内核完成的通信，不经过网络层</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>句柄：<ul>
+<li>遇到的问题：服务器监听各自端口，如果都监听同一个端口，报错，希望多进程监听一个端口</li>
+<li>解决思路：代理方案<ul>
+<li>主进程监听主端口（80）</li>
+<li>子进程监听不同的端口</li>
+<li>主进程接到请求，代理到不同的进程中</li>
+<li>不足：主从关系至少要2个文件描述符，影响系统的扩展能力</li>
+</ul>
+</li>
+<li>解决思路二：句柄<ul>
+<li>只使用一个描述符</li>
+<li><code>child.send(message, [sendHandle])</code>sendHandle句柄</li>
+<li>句柄是：一种可以用来标识资源的引用，它的内部包含了指向对象的文件描述符</li>
+<li>去掉代理，主进程接受到socket后，将这个socket发送给工作进程，解决描述符浪费的问题<ul>
+<li>单个子模块（9.3.3&#x2F;handle-single-child）</li>
+<li>多个子模块（9.3.3&#x2F;handle-mutl-child）</li>
+<li>http（9.3.3&#x2F;handle-http）主进程关闭服务器的监听，只让子进程来处理</li>
+</ul>
+</li>
+<li>句柄发送到底如何做到可以只监听一个端口的呢</li>
+<li>过程：<ul>
+<li>1、send()方法在将消息发送到IPC管道前，将消息组装成两个对象，一个参数是handle，另一个是message。</li>
+<li>2、message对象在写入到IPC管道时也会通过JSON.stringify()进行序列化，最终都是字符串</li>
+<li>3、子进程链接ipc通道，读取父进程发的消息，将字符串通过JSON.parse()解析还原为对象后</li>
+<li>这个过程中，消息对象还要被进行过滤处理，如果message.cmd值为NODE_HANDLE，它将取出message.type值和得到的文件描述符一起还原出一个对应的对象，还原过程</li>
+</ul>
+</li>
+<li>发送的的实际上是句柄描述符，接受的是同一个，这个过程中JSON转化了一遍</li>
+<li>独立进程中的socket描述符不相同，监听同一个端口报错，底层规定：就不同的进程，可以就相同的网卡、端口进行监听，套接字可以被不用的进程复用，因此问题解决</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4、集群稳定之路"><a href="#4、集群稳定之路" class="headerlink" title="4、集群稳定之路"></a>4、集群稳定之路</h4><blockquote>
+<p>为了多进程服务的稳定，也要考虑工作进程存活状态管理、平滑启动、配置动态载入等</p>
+</blockquote>
+<ul>
+<li>进程事件<ul>
+<li>error、exit、close、disconnect</li>
+<li>child.kill()&#x2F;process.kill(pid,’SIGTERM’) </li>
+<li>SIGTERM是软件终止信号</li>
+<li>子模块接收到这个事件，process.exit(1)</li>
+</ul>
+</li>
+<li>自动重启（9.4&#x2F;restore）<ul>
+<li>主进程中，接收到一个子进程退出，重启一个新的进程继续</li>
+<li>子进程监听uncaughtException事件，一旦触发，立即停止</li>
+<li>自杀信号：<ul>
+<li>有可能子进程等待退出，新进程未启动，</li>
+<li>得知要退出就发出<code>自杀信号</code>，</li>
+<li>主进程接收到，就启动新的（在前）</li>
+<li>达到平滑重启</li>
+</ul>
+</li>
+<li>设置一个超时退出</li>
+</ul>
+</li>
+<li>限量重启（9.4&#x2F;restore-limit）<ul>
+<li>解决：无限制频繁重启</li>
+<li>添加日志、监控系统、进行报警</li>
+</ul>
+</li>
+<li>负载均衡<ul>
+<li>Round-Robin 轮叫调度</li>
+<li>避免CPU和I&#x2F;O繁忙差异导致的负载不均衡</li>
+</ul>
+</li>
+<li>状态共存<ul>
+<li>第三方数据存储<ul>
+<li>数据发生变化，需要一种机制通知各个子进程</li>
+<li>轮询（不建议）</li>
+</ul>
+</li>
+<li>主动通知</li>
+</ul>
+</li>
+</ul>
+<h4 id="5、Cluster-模块（9-5-cluster）"><a href="#5、Cluster-模块（9-5-cluster）" class="headerlink" title="5、Cluster 模块（9.5&#x2F;cluster）"></a>5、Cluster 模块（9.5&#x2F;cluster）</h4><ul>
+<li>事实上cluster模块就是child_process和net模块的组合应用</li>
+<li>一个主进程只能管理一组工作进程</li>
+<li>child_process 则可以更灵活地控制工作进程，甚至控制多组工作进程</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/kkkkh">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <!-- <span>/</span> -->
+        
+        
+        <span><a target="_blank" rel="noopener" href="https://gen.zhtk.top">gen</a></span>
+        
+        
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://med.zhtk.top">med</a></span>
+        
+        
+        <span>/</span>
+        
+        <span><a href="">京ICP备2021005439号</a></span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        <!-- Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p> -->
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://giscus.app/client.js"
+  data-repo="kkkkh/my-blog"
+  data-repo-id="R_kgDOLb1f6w"
+  data-category="Announcements"
+  data-category-id="DIC_kwDOLb1f684CduwR"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="light"
+  data-lang="zh-CN"
+  crossorigin="anonymous"
+  async>
+</script>
+
+
+
+
+</html>

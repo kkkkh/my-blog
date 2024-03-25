@@ -12,7 +12,7 @@
 
     <title>
         
-        About - undefined
+        《深入浅出Node.js》-6理解buffer - undefined
         
     </title>
 
@@ -99,7 +99,7 @@
                     <span>收藏</span>
                 </a>
             </li>
-            <li  class=active >
+            <li >
                 <a href="/about/">
                     <i class="iconfont icon-guanyu2"></i>
                     <span>关于</span>
@@ -115,6 +115,10 @@
             
         </ul>
     </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81buffer%E7%BB%93%E6%9E%84"><span class="toc-text">1、buffer结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81Buffer%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-text">2、Buffer的转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81buffer%E7%9A%84%E6%8B%BC%E6%8E%A5"><span class="toc-text">3、buffer的拼接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81buffer%E4%B8%8E%E6%80%A7%E8%83%BD"><span class="toc-text">4、buffer与性能</span></a></li></ol>
+</div>
     
 </div>
 
@@ -141,22 +145,87 @@
     <div class="index-middle">
         <!-- Main Content -->
         
-<div class="post-content no-indent">
-    <p>个人思考记录</p>
-<ul>
-<li>2024.3.6<br>很多知识都是知其然，不知其所以然<br>多读一些经典书籍，并且读透，转换为自己的知识，便可做到知其所以然<br>才是真的提升<br>希望在今后，坚持此道</li>
+
+
+<div class="post-container">
+    <div class="post-title">
+        《深入浅出Node.js》-6理解buffer
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2024-03-07 16:13:22</span></span>
+        <!-- 
+        </span> -->
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#server" title="server">server</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Nodejs" title="Nodejs">Nodejs</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <ul>
+<li>buffer<ul>
+<li>各种场景下，要处理大量二进制数据，buffer应用而生</li>
 </ul>
-<p>但是如何读透，转换为自己的知识呢？<br>例如之前读一本技术相关书籍，会注重每一个细节，甚至将每一个案例都进行代码测试，<br>读完以后觉得，都基本读懂了<br>但是过了一段时间就忘记了，回想起来只剩下一个大致印象，也就剩10-20%了<br>无法真正内化为自己的知识，</p>
-<p>这不是读透，我今日理解的读透，转化<br>应该是读完以后，从大的层面着眼，一本首先有一个结构，主要在都讲了什么<br>假如这个本书有10章节，每个章节在说什么，强调了什么，再去深入下去<br>从上而下的读，更容易理解，哪怕后边记不清细节，也可以按此结构查找，<br>否则迷失在了细节中</p>
+</li>
+</ul>
+<h4 id="1、buffer结构"><a href="#1、buffer结构" class="headerlink" title="1、buffer结构"></a>1、buffer结构</h4><blockquote>
+<p>buffer的基本信息、内存分配<br>1、模块结构（核心模块）</p>
+</blockquote>
 <ul>
-<li>2024.3.14<br>林语堂曾经说过：“凡学英语，必学整句，不觉中将其句法音调整个吸入。<br>每日选二三句，回环熟诵，此数句读音必正，出口必熟。如此半年，操英语能力必大进。”</li>
+<li>典型的JavaScript与C++结合的模块<br>2、buffer对象(6.1.js)  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;深入浅出node.js&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> buf = <span class="keyword">new</span> <span class="title class_">Buffer</span>(str, <span class="string">&#x27;utf-8&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(buf);</span><br><span class="line"><span class="comment">// =&gt; &lt;Buffer e6 b7 b1 e5 85 a5 e6 b5 85 e5 87 ba 6e 6f 64 65 2e 6a 73&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>一个元素是16进制<code>两位</code>数,一个元素即一字节</li>
+<li>一个<code>中文字符</code>在UTF-8编码下占用<code>3</code>个字节</li>
+<li><code>字母</code>和<code>半角标点符号</code>占用<code>1</code>个字节<br>3、buffer内存分配</li>
+<li>采用slab分配机制</li>
+<li>full、partial、empty状态</li>
+<li>以8kb为界线分配</li>
+<li>小于8kb，<ul>
+<li>分配在一个8kb的slab单元中，</li>
+<li>剩余空间足够，则再次分配到这个slab单元中</li>
+<li>空间不足，创建新的slab</li>
+<li>一直被占用，空间不被释放</li>
+</ul>
+</li>
+<li>大于8kb<ul>
+<li>直接分配一个SlowBuffer对象作为slab单元，独占</li>
+</ul>
+</li>
+<li>真正内存是c++层面提供的，js层面只是使用它</li>
+</ul>
+<h4 id="2、Buffer的转换"><a href="#2、Buffer的转换" class="headerlink" title="2、Buffer的转换"></a>2、Buffer的转换</h4><blockquote>
+<p>buffer转换<br>1、字符串和buffer之间转化(6.2.js)<br>2、buffer不支持的编码类型<br>    - iconv-lite（纯JavaScript实现）<br>    - iconv（C++调用libiconv库完成） </p>
+</blockquote>
+<h4 id="3、buffer的拼接"><a href="#3、buffer的拼接" class="headerlink" title="3、buffer的拼接"></a>3、buffer的拼接</h4><blockquote>
+<p>fs读取大文件是时候<br>buffer 如何拼接<br>最终思路是（6.3.4.js）<br>  将每一部分的buffer放到一个数组；<br>  并记录整个buffer的长度；<br>  最后拼接起来</p>
+</blockquote>
+<h4 id="4、buffer与性能"><a href="#4、buffer与性能" class="headerlink" title="4、buffer与性能"></a>4、buffer与性能</h4><ul>
+<li>网络传输中，使用buffer传输，提高网络吞吐率<ul>
+<li>node 6.4.js (启动一个8001服务，res.end(buffer);)</li>
+<li><code>ab -c 200 -t 100 http://127.0.0.1:8001/</code></li>
+<li>文件读取时，highWaterMark设置会对buffer内存有影响</li>
+<li>设置越大，读取越快</li>
+</ul>
+</li>
 </ul>
 
-    
-    <div id="comment-container"></div>
-    <div id="disqus_thread"></div>
-    <div class="giscus"></div>
-    <div id="lv-container"></div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
 </div>
 
     </div>
@@ -223,7 +292,7 @@
     // We expose some of the variables needed by the front end
     window.hexo_search_path = "search.json"
     window.hexo_root = "/"
-    window.isPost = false
+    window.isPost = true
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 

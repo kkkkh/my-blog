@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="kkkkh&#39;s blog">
+    <meta property="og:type" content="website">
+    <meta name="description" content="kkkkh&#39;s blog">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        《深入浅出Node.js》- 8web应用 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Record and convert </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>kkkkh</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/categories">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>nav.categories</span>
+                </a>
+            </li> -->
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E5%9F%BA%E7%A1%80%E5%8A%9F%E8%83%BD"><span class="toc-text">1、基础功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E6%95%B0%E6%8D%AE%E4%B8%8A%E4%BC%A0"><span class="toc-text">2、数据上传</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E8%B7%AF%E7%94%B1%E8%A7%A3%E6%9E%90"><span class="toc-text">3、路由解析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-text">4、中间件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E9%A1%B5%E9%9D%A2%E6%B8%B2%E6%9F%93"><span class="toc-text">5、页面渲染</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> Record and convert </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        《深入浅出Node.js》- 8web应用
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2024-03-07 18:13:22</span></span>
+        <!-- 
+        </span> -->
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#server" title="server">server</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Nodejs" title="Nodejs">Nodejs</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h4 id="1、基础功能"><a href="#1、基础功能" class="headerlink" title="1、基础功能"></a>1、基础功能</h4><blockquote>
+<p>构建web应用考虑的基本功能<br>1、函数作为参数，传递给createServer()方法<br>2、请求方法处理 req.method<br>3、路径解析 req.url（静态文件、路径对应控制器）<br>4、查询字符串 ?foo&#x3D;bar&amp;baz&#x3D;val<br>5、cookie </p>
+</blockquote>
+<ul>
+<li>业务层面需要状态，区分身份</li>
+<li>响应的cookie，在Set-Cookie中<ul>
+<li>Path 影响的路径</li>
+<li>Expires（具体时间）、Max-Age（多久后） 过期时间</li>
+<li>HttpOnly 不允许浏览器修改</li>
+<li>Secure https才有效</li>
+</ul>
+</li>
+<li>性能：<ul>
+<li>减小cookie 域名相同都会带上</li>
+<li>静态组件使用不同的域名</li>
+</ul>
+</li>
+<li>广告：<ul>
+<li>标识用户，投放广告<br>6、session</li>
+</ul>
+</li>
+<li>数据保留在服务器，安全</li>
+<li>问题：<ul>
+<li>内存限制、进程之间内存不共享</li>
+</ul>
+</li>
+<li>解决：redis&#x2F;memchaed<ul>
+<li>第三方redis问题：网络访问（但影响较小）</li>
+</ul>
+</li>
+<li>安全：<ul>
+<li>使用一个私钥，签名session，进行加密，响应式作对比</li>
+<li>攻击者获取口令和签名</li>
+<li>将客户端的独有信息与口令，然后签名<br>7、缓存</li>
+</ul>
+</li>
+<li>在get请求中</li>
+<li>第一次请求：服务器内容</li>
+<li>第二次请求：<ul>
+<li>本地文件进行检查，不确定是否可用</li>
+<li>发起一次条件请求，<ul>
+<li>附带If-Modified-Since字段</li>
+<li>问服务有没有更改？没有，304，使用本地</li>
+<li>更改了，放弃本地</li>
+<li>If-Modified-Since 事件戳问题：<ul>
+<li>内容改动、时间戳没有改动</li>
+<li>只精确到妙级别，更频繁的无法生效</li>
+<li>使用Etag</li>
+</ul>
+</li>
+<li>Etag<ul>
+<li>if-None-Match&#x2F;ETag</li>
+<li><code>req.headers[&#39;if-None-Match&#39;]</code></li>
+<li><code>res.setHeader(&quot;Etag&quot;,hash)</code></li>
+<li>可以是根据文件内容生成散列值，进行对比</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>不发起请求<ul>
+<li>让浏览器明确地将内容缓存起来</li>
+<li>Expires<ul>
+<li><code>res.setHeader(&quot;Expires&quot;,toUTCString())</code></li>
+<li>不足：前后端时间不一致</li>
+</ul>
+</li>
+<li>Cache-Control头<ul>
+<li><code>res.setHeader(&quot;Cache-Control&quot;,&quot;max-age=10000000&quot;)</code></li>
+<li>max-age：倒计时方式计算过期</li>
+<li>还能设置public、private、no-cache、no-store更精细选型</li>
+</ul>
+</li>
+<li>这两个字段基本对应了cookie的字段</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>8、Basic认证<ul>
+<li>检查报文头Authorization字段的内容</li>
+<li>已废弃</li>
+<li>摘要访问认证（改进Basic认证）</li>
+<li>oauth</li>
+<li>sso</li>
+<li>jwt</li>
+</ul>
+</li>
+</ul>
+<h4 id="2、数据上传"><a href="#2、数据上传" class="headerlink" title="2、数据上传"></a>2、数据上传</h4><blockquote>
+<p>报文体解析、Content-Type常见类型、安全：内存、CSRF</p>
+</blockquote>
+<ul>
+<li>node对报文体没有解析，自行解析<ul>
+<li>通过这两个字段：Transfer-Encoding（长度未知）或Content-Length（长度一致） 判断有没有内容</li>
+<li>这两个字段互斥</li>
+<li>Transfer-Encoding:chunked 分成块逐个发送</li>
+</ul>
+</li>
+<li>Content-Type 常见格式<ul>
+<li>接受处理思路：先接受内容，在解析格式</li>
+<li><code>rawBody</code>是buffer拼接而成的</li>
+<li>Content-Type: application&#x2F;x-www-form-urlencoded (<form>表单)<ul>
+<li>最简单：使用<code>querystring.parse(req.rawBody)</code>解析</li>
+</ul>
+</li>
+<li>Content-Type: application&#x2F;json;charset&#x3D;utf-8<ul>
+<li>json：<code>JSON.parse(req.rawBody)</code>解析</li>
+</ul>
+</li>
+<li>Content-Type: application&#x2F;xml;charset&#x3D;utf-8<ul>
+<li>xml：库xml2js <code>xml2js.parse(req.rawBody)</code></li>
+</ul>
+</li>
+<li>Content-Type: multipart&#x2F;form-data; boundary&#x3D;AaB03x (formdata)<ul>
+<li>提交文件：file类型的控件</li>
+<li>boundary&#x3D;AaB03x指定的是每部分内容的分界符，随机生成的一段字符串</li>
+<li>通过在它前面添加–进行分割，结束时在<code>前后边都加--</code>，标识结束</li>
+<li>后边进行验证下</li>
+</ul>
+</li>
+<li>对于文件上传，上面这种处理思路变得不可接受，先处理格式，找到对应的处理方法</li>
+<li>文件上传使用，模块formidable（8.2&#x2F;upload）</li>
+</ul>
+</li>
+<li>安全<ul>
+<li>内存<ul>
+<li>限制上传大小 （Transfer-Encoding&#x2F;Content-Length两个字段来控制大小）</li>
+<li>导向磁盘</li>
+</ul>
+</li>
+<li>CSRF（Cross-Site Request Forgery）<ul>
+<li>场景：<ul>
+<li>留言中添加访问接口代码，或者邮件中诱导客户点击链接</li>
+</ul>
+</li>
+<li>过程<ul>
+<li>网站a是正常的，登录用户，发起过请求</li>
+<li>网站b（黑客的）中添加网站a的请求</li>
+<li>攻击者诱导客户从a登录用户访问b</li>
+<li>到达b自动向a发送一个请求</li>
+</ul>
+</li>
+<li>解决<ul>
+<li>为每个请求的用户，在Session中赋予一个随机值，_csrf</li>
+<li>将这个值告诉前端</li>
+<li>每次请求都带上</li>
+<li>服务端存储的随机值进行对比</li>
+<li>伪代码中无法获取这个随机值，发起请求，则失效</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3、路由解析"><a href="#3、路由解析" class="headerlink" title="3、路由解析"></a>3、路由解析</h4><blockquote>
+<p>路由解析三种思路：文件路径、mvc（映射）、restful</p>
+</blockquote>
+<ul>
+<li>文件路径<ul>
+<li>静态文件：url与路径一致</li>
+<li>动态文件：（node不常见）<ul>
+<li>根据路径找到执行脚本，</li>
+<li>根据文件后缀寻找文本解析器，执行脚本</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>MVC<ul>
+<li>URL路径原来可以跟具体脚本所在的路径没有任何关系</li>
+<li>包括<ul>
+<li>控制器（Controller），一组行为的集合。</li>
+<li>模型（Model），数据相关的操作和封装。</li>
+<li>视图（View），视图的渲染。</li>
+</ul>
+</li>
+<li>思路<ul>
+<li>路由解析，根据URL寻找到对应的控制器和行为</li>
+<li>行为调用相关的模型，进行数据操作</li>
+<li>数据操作结束后，调用视图和相关数据进行页面渲染，输出到客户端</li>
+</ul>
+</li>
+<li>实现：如何根据URL做路由映射<ul>
+<li>1、手工映射(&#x2F;8.3&#x2F;handmap.js)<ul>
+<li>添加一个路由表，路径对应action</li>
+<li>将请求的路径，解析，找到对应路由，执行action</li>
+<li>复杂的使用正则匹配</li>
+</ul>
+</li>
+<li>2、自然关联映射(&#x2F;8.3&#x2F;naturemap.js)<ul>
+<li>尽是路由不如无路由</li>
+<li>实质是路由按一种约定的方式自然而然地实现了路由，而无须去维护路由映射</li>
+<li>将如下路径进行了划分处理</li>
+<li>&#x2F;user&#x2F;setting&#x2F;12&#x2F;1987为例，<ul>
+<li>它会按约定去找controllers目录下的user文件，</li>
+<li>将其require出来后，调用这个文件模块的setting()方法</li>
+<li>&#x2F;12&#x2F;1987作为参数传递</li>
+<li>php ci框架中应用十分广泛</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>RESTful<ul>
+<li>（Representational State Transfer） 表现层状态转化</li>
+<li>将服务器端提供的内容实体看作一个资源</li>
+<li>对这个资源的操作，主要体现在HTTP请求方法上，不是体现在URL上<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">POST</span> /user/jacksontian        </span><br><span class="line"><span class="variable constant_">DELETE</span> /user/jacksontian        </span><br><span class="line"><span class="variable constant_">PUT</span> /user/jacksontian        </span><br><span class="line"><span class="variable constant_">GET</span> /user/jacksontian</span><br></pre></td></tr></table></figure></li>
+<li>资源的具体格式由请求报头中的Accept字段和服务器端的支持情况来决定<ul>
+<li><code>Accept: application/json, application/xml</code></li>
+</ul>
+</li>
+<li>综述：<ul>
+<li><code>app.post(&#39;/user/:username&#39;,addUser)</code></li>
+<li>通过URL设计资源<code>/user/:username</code></li>
+<li>请求方法定义资源的操作 <code>GET POST</code></li>
+<li>通过Accept决定资源的表现形式 <code>Accept: application/json, application/xml</code></li>
+</ul>
+</li>
+<li>具体实现<ul>
+<li>routes改为method对应结构，app也改为method对应结果</li>
+<li>app.use()注册一个路由，填充到routes和app</li>
+<li>根据req.url和req.method进行解析，找到对应路由以及处理函数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4、中间件"><a href="#4、中间件" class="headerlink" title="4、中间件"></a>4、中间件</h4><blockquote>
+<p>中间件实现思路</p>
+</blockquote>
+<ul>
+<li>定义<ul>
+<li>将细节按照不同的功能“公共功能”（基础设施）和“业务逻辑”进行分离；</li>
+<li>封装底层细节，为上层提供更方便服务</li>
+</ul>
+</li>
+<li>原理：尾触发<ul>
+<li>1、注册use的时候，将中间件push到路由对应stack[]中</li>
+<li>2、url进行match路由的时候（接受请求），匹配到，将对应stack传到第三个参数，继续进行handle执行操作</li>
+<li>3、执行的时候，从stack中shift出，判断有没有中间件，如果有则执行当前中间件</li>
+<li>4、因为stack有可能有多个中间件，将stack传给当前执行中间件的第三个参数（递归）</li>
+<li>5、中间件都改为，有第三个参数的模式，执行玩自己的内容，走第三个参数（尾调用）next，即下一个中间件</li>
+<li>6、增加路由共同的中间件、各自的中间件</li>
+</ul>
+</li>
+<li>特点：职责单一、可扩展、可组合</li>
+<li>性能：<ul>
+<li>1、编写高效中间件；<ul>
+<li>高效方法 <code>jsperf.com</code>测试基准性能</li>
+<li>缓存需要重复计算的结果</li>
+<li>避免不必要的计算</li>
+</ul>
+</li>
+<li>2、合理利用路由，避免不必要的中间件执行；<ul>
+<li>只有&#x2F;public路径会匹配上，其余路径根本不会涉及该中间件</li>
+<li><code>app.use(&#39;/public&#39;, staticFile);</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="5、页面渲染"><a href="#5、页面渲染" class="headerlink" title="5、页面渲染"></a>5、页面渲染</h4><blockquote>
+<p>页面渲染需要考虑的因素以及实现原理</p>
+</blockquote>
+<ul>
+<li>内容响应<ul>
+<li>响应报头中的 Content-*字段十分重要</li>
+<li>1、MINI</li>
+<li>2、下载附件<ul>
+<li>Content-Disposition字段应声登场</li>
+<li>Content-Disposition: attachment; filename&#x3D;”filename.ext”</li>
+</ul>
+</li>
+<li>3、响应JSON</li>
+<li>4、响应跳转</li>
+</ul>
+</li>
+<li>视图渲染<ul>
+<li>模板技术：<ul>
+<li>模板语言</li>
+<li>包含模板语言的模板文件</li>
+<li>拥有动态数据的数据对象</li>
+<li>模板引擎</li>
+</ul>
+</li>
+<li>模版技术演化：<ul>
+<li>1.0：在CGI程序或servlet中输出HTML片段</li>
+<li>2.0：动态网页技术，如ASP、PHP、JSP（模板极度依赖上下文）<ul>
+<li>ASP、PHP、JSP而言，模板属于服务器端动态页面的内置功能</li>
+<li>模板语言就是它们的宿主语言（VBScript、JScript、PHP、Java），</li>
+<li>模板文件就是以．php、.asp、.jsp为后缀的文件，</li>
+<li>模板引擎就是Web容器</li>
+</ul>
+</li>
+<li>3.0 脱离上下文环境，但依赖宿主语言<ul>
+<li>PHPLIB Template和FastTemplate、</li>
+<li>Java的XSTL，以及Velocity、JDynamiTe、Tapestry</li>
+</ul>
+</li>
+<li>4.0 破局者是Mustache<ul>
+<li>给出了十多门编程语言的模板引擎实现</li>
+<li>可移植</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>模板技术本质- 拼接字符串这样很底层的活</li>
+<li>实现考虑：<ul>
+<li>基础模板引擎（实现思路）：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 中间函数</span></span><br><span class="line"><span class="keyword">var</span> complie = <span class="keyword">function</span> (<span class="params">str</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> tpl = str.<span class="title function_">replace</span>(<span class="regexp">/&lt;%=([\s\S]+? )%&gt;/g</span>, <span class="keyword">function</span>(<span class="params">match, code</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&#x27; + obj.&quot;</span> + code + <span class="string">&quot;+ &#x27;&quot;</span>;</span><br><span class="line">  &#125;);</span><br><span class="line">  tpl = <span class="string">&quot;var tpl = &#x27;&quot;</span> + tpl + <span class="string">&quot;&#x27;\nreturn tpl; &quot;</span>;</span><br><span class="line">  <span class="comment">// Function构造函数</span></span><br><span class="line">  <span class="comment">// new Function ([arg1[, arg2[, ... argN]], ] functionBody)</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Function</span>(<span class="string">&#x27;obj, escape&#x27;</span>, tpl);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> render = <span class="keyword">function</span> (<span class="params">complied, data</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">complied</span>(data);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> tpl = <span class="string">&#x27;Hello &lt;%=username%&gt;.&#x27;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">render</span>(<span class="title function_">complie</span>(tpl), &#123;<span class="attr">username</span>: <span class="string">&#x27;Jackson Tian&#x27;</span>&#125;));</span><br><span class="line"><span class="comment">// =&gt; Hello Jackson Tian.</span></span><br></pre></td></tr></table></figure></li>
+<li>with应用 支持不同变量</li>
+<li>模版安全<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">escape</span> = <span class="keyword">function</span> (<span class="params">html</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">String</span>(html)</span><br><span class="line">    .<span class="title function_">replace</span>(<span class="regexp">/&amp;(? ! \w+; )/g</span>, <span class="string">&#x27;&amp;amp; &#x27;</span>)</span><br><span class="line">    .<span class="title function_">replace</span>(<span class="regexp">/&lt;/g</span>, <span class="string">&#x27;&amp;lt; &#x27;</span>)</span><br><span class="line">    .<span class="title function_">replace</span>(<span class="regexp">/&gt;/g</span>, <span class="string">&#x27;&amp;gt; &#x27;</span>)</span><br><span class="line">    .<span class="title function_">replace</span>(<span class="regexp">/&quot;/g</span>, <span class="string">&#x27;&amp;quot; &#x27;</span>)</span><br><span class="line">    .<span class="title function_">replace</span>(<span class="regexp">/&#x27;/g</span>, <span class="string">&#x27;&amp;#039; &#x27;</span>); <span class="comment">// IE下不支持&amp;apos;（单引号）转义</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>字符转义，html字符转为安全字符</li>
+<li>支持逻辑 if else</li>
+<li>集成文件系统 将tpl模版放在文件中</li>
+<li>子模版：支持复用</li>
+<li>布局视图：父模版的复用</li>
+<li>性能</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/kkkkh">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <!-- <span>/</span> -->
+        
+        
+        <span><a target="_blank" rel="noopener" href="https://gen.zhtk.top">gen</a></span>
+        
+        
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://med.zhtk.top">med</a></span>
+        
+        
+        <span>/</span>
+        
+        <span><a href="">京ICP备2021005439号</a></span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        <!-- Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p> -->
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://giscus.app/client.js"
+  data-repo="kkkkh/my-blog"
+  data-repo-id="R_kgDOLb1f6w"
+  data-category="Announcements"
+  data-category-id="DIC_kwDOLb1f684CduwR"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="light"
+  data-lang="zh-CN"
+  crossorigin="anonymous"
+  async>
+</script>
+
+
+
+
+</html>
