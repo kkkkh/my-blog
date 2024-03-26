@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="kkkkh&#39;s blog">
+    <meta property="og:type" content="website">
+    <meta name="description" content="kkkkh&#39;s blog">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        《深入浅出Node.js》- 总结篇 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Record and convert </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpeg" />
+        </div>
+        <div class="name">
+            <i>kkkkh</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/categories">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>nav.categories</span>
+                </a>
+            </li> -->
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> Record and convert </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        《深入浅出Node.js》- 总结篇
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2024-03-09 18:13:22</span></span>
+        <!-- 
+        </span> -->
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#Nodejs" title="Nodejs">Nodejs</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#book" title="book">book</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <blockquote>
+<p>《深入浅出Node.js》10多年前出版的书，依旧经典耐读</p>
+</blockquote>
+<p>关于读《深入浅出Node.js》这本书有很多的感悟，就在此跟大家一一分享了</p>
+<p>首先我是如何读到这本书的，1年前学习nodejs，当时学的云里雾里，很多概念都不是很清晰，只会调取一些node的api，可以写一个服务后台，但是这种程度练习，早在几年前其实就有过，但是都是浅尝辄止，因此我去微信读书，搜索nodejs相关的书籍，找到一本评分较高的，就是这本《深入浅出Node.js》，然后开始了我的nodejs（1.0）深入学习。</p>
+<p>开始读了几章，发现这就是我想看的书籍，为什么呢？因为这本书的讲解，系统、深度、透彻来形容都不为过，读了前几章，之前萦绕在大脑的一些问题迎刃而解，比如：在第5章内存控制，v8垃圾回收原理，原来也知道一些新生代、老生代，别人一问深了，就不知道了，但是看完这一章相关的，就把v8垃圾回收原理都搞清楚了，等等，总之这是一本学习node的好书。</p>
+<p>后边继续阅读，大概阅读到7章左右，代码逐渐增多，发现一个问题？只阅读文章，不进行代码测试，有时候理解困难，即便理解了依然没有完全吃透，因此从后起，开始将示例代码逐一验证，在这个过程中进行学习理解，再后来关于单元测试第10章，给了我很大的启发，之前写代码几乎从未写过单元测试，这是多多大的遗憾和不足，单元测试虽费时间，但是长远来看又解释时间，将改bug的时间，用在了测试上，何乐而不为呢？</p>
+<p>后来种种原因，等到第11、12章的时候，就断了，开始其他事务，留了一个尾巴，因为今年又开始我第2次阅读，将没有看完的补上，看过的再复习一遍，2.0阅读开始。</p>
+<p>首先呢，我确实觉得读一本书，不能只看一遍，看一遍一是容易忘记，二是很多概念可能还没有理解透彻，但是<code>如何高效的读书</code>确实是我从2.0过程中有感悟出来的一个话题，这话题我们最后讲，现在先回顾下我如何第2次阅读的过程。</p>
+<p>第二次阅读，因为之前有一遍阅读了，我想有之前的映像，这边应该很快的，但是实际过程中低估了这本书的内容量，这本书是大概10年前作者完成的，虽然里边有一些技术，已经过时且废弃了，但是它对这些技术的使用思路、源码分析一点不过时，虽然可能不用这个技术，这个包，但是它的分析思路确实可以用到任何的新技术和新包当中，结果在这过程中，我还是花费了近一周的多的时间，才将所有章节的内容过完，这确实是我低估造成的</p>
+<p>第二呢我发现另外一个问题，就是这本书读在1年前，现在来看，除了一些章节有部分记忆点外（占本书的30%左右），有一些读过的章节，我居然好多内容没有映像了，那么我的第一遍的吸收率怎么会如此之低？去年做的笔记，有的看不太懂，有的就是废话一堆，这真是一件费力却不出效果的事情，想想自己这几年的技术学习，好像并不是只有这一本书是这样的，很多技术也都是这样，学过了也讲不出所以然，如果你花的时间比别人多，却还效果没有别人好，那么还是让我很有挫败感，要有所改变，必须提高效率</p>
+<p>结果这次确实也有所收获，笔记要写清，再看能看懂，但是感觉自己又陷入了另外一个误区，因为第一次读，效率不高，第二次要提高效率，对大部分知识点都做笔记，将讲解过程理解透，对每一个模块都进行测试，效果呢？只能说开始还可以，但是随着时间的推移，笔记越落越高，后边还能有映像，前边的又有遗忘了，想把所有都记住，到最后又可能还是只记住一点，真是该死啊。</p>
+<p>如何解呢？我们不能陷入到被动，也不能陷入到这个误区中无法自拔，其实回想下，你学习并不一定全部知晓，可以只知道其中大意即可，读完一章或一节，还是要回顾下，用一句话或者简短的话，描述下讲的是什么，将细节先过滤掉，比如垃圾回收原理，用一句话说垃圾回收原理就是：新生代用两块空间互换来回回收、老生代清除没有标记的内存；比如中间件代码实现原理：将中间件方法对应路由进行存储，接收到请求后再一次递归执行，采用第三个参数做尾调用；这样就出一个轮廓，再在此轮廓上描述细节填充回忆，只要有了这个大意，理解了基本原理，记不清的细节，再去查阅一遍，基本可以了解清晰，这是一个解决的方法</p>
+<p>面对千千万万的问题和细节，这是一个对我而言的好方法，所以前面的这一系列的文章，如果你阅读（还是推荐你阅读本书），就当是我的总结笔记吧，至于笔记还是要用自己的能看懂的语言描述清楚，确实可以在以后方便查阅</p>
+<p>最后再说下如何高效的读书，亦或是高效的学习吧，结合过往学习以及这两次阅读，我认为像《深入浅出Node.js》类似书籍呢，其实不用电子图书为好，电子图书有一个不足，我自身的感受，电子图书不方便查阅，你可以在对应章节中做标记，也可以写markdown，但是依旧不足。</p>
+<p>电子书做标记与纸质书做标记，在查阅上有很大的不同，比如你看到了第5章内容，你觉得之前在哪里看到过，你去查找你做的标记或者内容，有时候记忆不深的话，找起来很费力，但是纸质书可以一翻就找到了；当然电子书可以搜索或者查看自己的笔记，但是总感觉要翻到哪一页或者想观全貌的时候仍旧不足；至于markdown对电子书做笔记，复制粘贴自己觉得重点的内容，是一件很费时的事，而纸质书，在阅读过程中不需要这些；我读纸质书，先用黑笔做一次标记，在用红笔将重点圈出，一目了然，为此我又买了一本《深入浅出Node.js》纸质书，以方便后续记录、阅读、查阅。</p>
+<p>如果你有幸看到这篇文章，谢谢看我长篇大论的啰嗦，但是对我而言还是很有帮助的，也希望我的学习经验对你有所帮助。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/kkkkh">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <!-- <span>/</span> -->
+        
+        
+        <span><a target="_blank" rel="noopener" href="https://gen.zhtk.top">gen</a></span>
+        
+        
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://med.zhtk.top">med</a></span>
+        
+        
+        <span>/</span>
+        
+        <span><a href="">京ICP备2021005439号</a></span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        <!-- Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p> -->
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://giscus.app/client.js"
+  data-repo="kkkkh/my-blog"
+  data-repo-id="R_kgDOLb1f6w"
+  data-category="Announcements"
+  data-category-id="DIC_kwDOLb1f684CduwR"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="light"
+  data-lang="zh-CN"
+  crossorigin="anonymous"
+  async>
+</script>
+
+
+
+
+</html>
